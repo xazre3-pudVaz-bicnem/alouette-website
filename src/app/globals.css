@@ -1,0 +1,259 @@
+@import 'tailwindcss';
+
+@theme {
+  /* ── Brand palette ──────────────────────────────────────────────
+     ソフトピンク / ローズ / アイボリー / ボルドー / シャンパンゴールド  */
+  --color-ink: #1c0d14; /* 夜の黒（わずかに赤み） */
+  --color-ink-soft: #3a2029;
+  --color-bordeaux: #6d1b36; /* 濃いボルドー */
+  --color-rose: #c2416b; /* ローズピンク（テキスト・線） */
+  --color-petal: #ec7fa4; /* メインのピンク */
+  --color-blush: #f7d9e3; /* ソフトピンク */
+  --color-shell: #fdf1f4; /* ごく淡いピンク */
+  --color-ivory: #fcf9f5; /* アイボリー */
+  --color-champagne: #c2a35d; /* シャンパンゴールド */
+
+  --font-sans: var(--font-zen-kaku), 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  --font-display: var(--font-shippori), 'Yu Mincho', serif;
+  --font-latin: var(--font-cormorant), Georgia, serif;
+
+  --shadow-soft: 0 18px 50px -30px rgba(109, 27, 54, 0.45);
+  --shadow-lift: 0 26px 60px -34px rgba(109, 27, 54, 0.55);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    /* SP固定ナビの高さ。ヘッダー／フッターの余白計算に使う */
+    --mobile-nav-h: 62px;
+    --header-h: 64px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: 'palt' 1;
+    line-height: 1.9;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* SP固定ナビの分だけ本文下に余白を確保（ナビとの重なり防止） */
+  @media (max-width: 1023px) {
+    body {
+      padding-bottom: var(--mobile-nav-h);
+    }
+  }
+
+  /* アンカー移動時に固定ヘッダーへ潜り込まないように */
+  :target {
+    scroll-margin-top: calc(var(--header-h) + 16px);
+  }
+
+  ::selection {
+    background: var(--color-blush);
+    color: var(--color-bordeaux);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-rose);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* 欧文書体は既定でオールドスタイル数字になるため、
+     電話番号や金額が読みやすいようライニング数字に揃える */
+  .font-latin,
+  .eyebrow {
+    font-variant-numeric: lining-nums;
+  }
+
+  /* 見出しの上に置く英字ラベル */
+  .eyebrow {
+    font-family: var(--font-latin);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+  }
+
+  /* 本文コンテナ */
+  .container-page {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 76rem;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* 細い罫線を引いた区切り */
+  .hairline {
+    border-top: 1px solid rgba(194, 65, 107, 0.18);
+  }
+
+  /* ニュース本文（Markdown から生成した HTML）の体裁 */
+  .prose-alouette :where(h2) {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    line-height: 1.6;
+    margin-block: 2.4rem 0.9rem;
+    padding-left: 0.85rem;
+    border-left: 3px solid var(--color-petal);
+    color: var(--color-bordeaux);
+  }
+  .prose-alouette :where(h3) {
+    font-family: var(--font-display);
+    font-size: 1.12rem;
+    margin-block: 1.9rem 0.6rem;
+    color: var(--color-bordeaux);
+  }
+  .prose-alouette :where(p) {
+    margin-block: 1rem;
+  }
+  .prose-alouette :where(a) {
+    color: var(--color-rose);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-alouette :where(ul, ol) {
+    margin-block: 1rem;
+    padding-left: 1.4rem;
+  }
+  .prose-alouette :where(ul) {
+    list-style: disc;
+  }
+  .prose-alouette :where(ol) {
+    list-style: decimal;
+  }
+  .prose-alouette :where(li) {
+    margin-block: 0.35rem;
+  }
+  .prose-alouette :where(strong) {
+    color: var(--color-bordeaux);
+    font-weight: 700;
+  }
+  .prose-alouette :where(blockquote) {
+    margin-block: 1.4rem;
+    padding: 0.8rem 1.2rem;
+    background: var(--color-shell);
+    border-left: 3px solid var(--color-blush);
+  }
+  .prose-alouette :where(img) {
+    height: auto;
+    max-width: 100%;
+    border-radius: 0.5rem;
+  }
+  .prose-alouette :where(table) {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+    margin-block: 1.4rem;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+  }
+  .prose-alouette :where(th, td) {
+    border: 1px solid rgba(194, 65, 107, 0.2);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+  .prose-alouette :where(th) {
+    background: var(--color-shell);
+    color: var(--color-bordeaux);
+    white-space: nowrap;
+  }
+}
+
+@layer utilities {
+  /* スクロール連動のフェードイン（IntersectionObserver で is-visible を付与） */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* ヒーロー写真のゆるやかなズーム */
+  .ken-burns {
+    animation: kenBurns 22s ease-out forwards;
+  }
+  @keyframes kenBurns {
+    from {
+      transform: scale(1.08);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
+  /* 小さなきらめき */
+  .twinkle {
+    animation: twinkle 3.6s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%,
+    100% {
+      opacity: 0.25;
+      transform: scale(0.85);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* 文字の順次表示 */
+  .rise-in {
+    animation: riseIn 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes riseIn {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .text-vertical {
+    writing-mode: vertical-rl;
+  }
+}
