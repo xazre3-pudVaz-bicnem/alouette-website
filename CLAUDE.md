@@ -78,6 +78,19 @@
   （ギャラリーでは「イメージ」バッジを付ける）。
 - Tailwind v4 のため、素のクラスは `@layer components` に書く（ユーティリティを打ち消さないように）。
 
+## レイアウトの決まりごと
+
+- **ヘッダーは `position: fixed`。** その高さぶんの余白は `layout.tsx` の
+  `<main className="pt-[var(--header-h)]">` で確保している。
+  全面表示したいセクション（トップのヒーロー）だけ `mt-[calc(var(--header-h)*-1)]` で打ち消す。
+  **各ページ側で padding-top を足さないこと**（パンくずがヘッダーに隠れる原因になる）。
+- **画像の枠は元画像の縦横比に合わせる。** `public/images/visual/` と `hero-main.jpg` は
+  すべて 16:9（1672×941）。縦長・正方形の枠に入れると人物が切れるので、
+  基本は `aspect-video`。やむを得ず別比率にするときは `data/visuals.ts` の
+  `focusOf()` で object-position を指定する。
+  店内写真（`store/*.jpg`）は 1:1 が中心なので `aspect-square` が合う。
+- ナビゲーションのリンクは高さ24px以上を確保する（フッター・パンくずは `py-1.5` を付ける）。
+
 ## 実装の約束
 
 - 既定は Server Component。`'use client'` は Header / MobileNav / Reveal / GalleryGrid のみ。

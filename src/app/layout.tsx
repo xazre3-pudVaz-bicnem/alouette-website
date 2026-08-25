@@ -91,7 +91,11 @@ export default function RootLayout({
         <JsonLd data={websiteJsonLd()} />
 
         <Header />
-        <main id="main">{children}</main>
+        {/* ヘッダーは position:fixed のため、その高さぶんの余白をここで確保する。
+            トップのヒーローだけは全面表示のため負のマージンで打ち消している。 */}
+        <main id="main" className="pt-[var(--header-h)]">
+          {children}
+        </main>
         <Footer />
         <MobileNav />
       </body>

@@ -69,6 +69,21 @@ export const galleryImages: GalleryImage[] = [
     height: 426,
   },
 
+  {
+    src: '/images/store/store-exterior.jpg',
+    alt: 'alouette の店舗外観。「あるえっと」と書かれた白い看板のある入口',
+    category: '店内',
+    width: 1280,
+    height: 1280,
+  },
+  {
+    src: '/images/store/store-counter-02.jpg',
+    alt: 'alouette のカウンター内側から見た店内',
+    category: 'カウンター',
+    width: 1280,
+    height: 1280,
+  },
+
   // ── キャスト写真（店舗から提供されたもの） ──
   {
     src: '/images/cast/yui-main.jpg',

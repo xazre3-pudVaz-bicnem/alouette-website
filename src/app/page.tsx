@@ -21,6 +21,7 @@ import { realPhotos } from '@/data/gallery';
 import { recruit } from '@/data/recruit';
 import { accessSteps } from '@/data/access';
 import { getAllNews } from '@/lib/news';
+import { focusOf } from '@/data/visuals';
 import { formatDateDot } from '@/lib/date';
 import { buildMetadata } from '@/lib/seo';
 
@@ -35,6 +36,8 @@ export const metadata: Metadata = buildMetadata({
 export const revalidate = 3600;
 
 const yen = (n: number) => `${n.toLocaleString('ja-JP')}円`;
+
+const CONCEPT_VISUAL = '/images/visual/counter-neon.jpg';
 
 export default async function HomePage() {
   const casts = publishedCasts().slice(0, 4);
@@ -64,26 +67,36 @@ export default async function HomePage() {
           </Reveal>
 
           <Reveal className="order-1 lg:order-2" delay={120}>
-            <div className="relative">
-              <div className="relative aspect-4/5 overflow-hidden sm:aspect-3/4">
+            <figure>
+              {/* イラストは 16:9。枠も同じ比率にして切り取られないようにする */}
+              <div className="relative aspect-video overflow-hidden rounded-lg">
                 <Image
-                  src="/images/visual/counter-neon.jpg"
+                  src={CONCEPT_VISUAL}
                   alt="ネオンの灯るカウンターで過ごす夜のイメージイラスト"
                   fill
                   sizes="(min-width: 1024px) 45vw, 90vw"
+                  style={{ objectPosition: focusOf(CONCEPT_VISUAL) }}
                   className="object-cover"
                 />
               </div>
-              <div className="absolute -bottom-8 -left-4 hidden aspect-square w-40 overflow-hidden border-8 border-ivory sm:block lg:-left-10 lg:w-52">
-                <Image
-                  src="/images/store/store-counter.jpg"
-                  alt="alouette 店内のカウンター席"
-                  fill
-                  sizes="208px"
-                  className="object-cover"
-                />
+
+              {/* 実際の店内写真を右下に重ねる */}
+              <div className="relative -mt-12 ml-auto w-36 sm:-mt-16 sm:w-52 lg:w-60">
+                <div className="relative aspect-square overflow-hidden rounded-lg border-[6px] border-ivory shadow-lift">
+                  <Image
+                    src="/images/store/store-counter.jpg"
+                    alt="alouette 店内のカウンター席"
+                    fill
+                    sizes="(min-width: 640px) 240px, 144px"
+                    className="object-cover"
+                  />
+                </div>
               </div>
-            </div>
+
+              <figcaption className="mt-3 text-right text-[0.7rem] leading-relaxed text-ink-soft/70">
+                上：イメージイラスト／下：実際の店内
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       </section>
@@ -343,7 +356,7 @@ export default async function HomePage() {
             {photos.map((photo) => (
               <li
                 key={photo.src}
-                className="relative aspect-4/5 overflow-hidden"
+                className="relative aspect-square overflow-hidden"
               >
                 <Image
                   src={photo.src}

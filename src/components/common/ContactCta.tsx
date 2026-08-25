@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import ReserveActions from '@/components/common/ReserveActions';
 import Reveal from '@/components/ui/Reveal';
+import { focusOf } from '@/data/visuals';
 
 /**
  * 各ページ末尾のご予約導線。
@@ -22,6 +23,7 @@ export default function ContactCta({
         alt=""
         fill
         sizes="100vw"
+        style={{ objectPosition: focusOf(image) }}
         className="object-cover opacity-30"
       />
       <div

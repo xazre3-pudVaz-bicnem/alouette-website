@@ -39,7 +39,7 @@ export default function Footer() {
               <p>
                 <a
                   href={`tel:${store.telHref}`}
-                  className="font-latin text-lg tracking-wide text-ivory hover:text-blush"
+                  className="inline-block py-1 font-latin text-lg tracking-wide text-ivory hover:text-blush"
                 >
                   TEL {store.tel}
                 </a>
@@ -61,7 +61,7 @@ export default function Footer() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="group inline-flex items-baseline gap-2.5 text-ivory/85 transition hover:text-blush"
+                      className="group inline-flex items-baseline gap-2.5 py-1 text-ivory/85 transition hover:text-blush"
                     >
                       <span className="font-latin text-[0.72rem] tracking-[0.18em] text-petal">
                         {item.label}
@@ -87,7 +87,7 @@ export default function Footer() {
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {utilityNavigation.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="hover:text-blush">
+                <Link href={item.href} className="inline-block py-1.5 hover:text-blush">
                   {item.label}
                 </Link>
               </li>

@@ -14,6 +14,7 @@ import { drinks, options, orderFlow, usageNotes } from '@/data/menu';
 import { featuredFaqs } from '@/data/faq';
 import { store } from '@/data/store';
 import { accessSteps } from '@/data/access';
+import { focusOf } from '@/data/visuals';
 import { faqJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 
@@ -64,12 +65,13 @@ export default function FirstGuidePage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="relative aspect-4/3 overflow-hidden rounded-lg">
+            <div className="relative aspect-video overflow-hidden rounded-lg">
               <Image
                 src="/images/visual/counter-day.jpg"
                 alt="カウンター越しに気軽にお話しできる雰囲気のイメージイラスト"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
+                style={{ objectPosition: focusOf('/images/visual/counter-day.jpg') }}
                 className="object-cover"
               />
             </div>

@@ -18,6 +18,7 @@ import {
   usageNotes,
 } from '@/data/menu';
 import { faqs } from '@/data/faq';
+import { focusOf } from '@/data/visuals';
 import { faqJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 
@@ -62,12 +63,13 @@ export default function MenuPage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="relative aspect-4/3 overflow-hidden rounded-lg lg:aspect-square">
+            <div className="relative aspect-video overflow-hidden rounded-lg">
               <Image
                 src="/images/visual/bar-drink.jpg"
                 alt="カウンターでドリンクを楽しむイメージイラスト"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
+                style={{ objectPosition: focusOf('/images/visual/bar-drink.jpg') }}
                 className="object-cover"
               />
             </div>

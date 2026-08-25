@@ -8,6 +8,7 @@ import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ActionLink from '@/components/ui/ActionLink';
 import { charms, conceptLead, features, tagline } from '@/data/concept';
+import { focusOf } from '@/data/visuals';
 import { store } from '@/data/store';
 import { buildMetadata } from '@/lib/seo';
 
@@ -55,15 +56,41 @@ export default function ConceptPage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="relative aspect-4/5 overflow-hidden">
-              <Image
-                src="/images/visual/interior-cafe.jpg"
-                alt="ピンクを基調にした店内の雰囲気のイメージイラスト"
-                fill
-                sizes="(min-width: 1024px) 45vw, 90vw"
-                className="object-cover"
-              />
-            </div>
+            <figure>
+              <div className="relative aspect-video overflow-hidden rounded-lg">
+                <Image
+                  src="/images/visual/interior-cafe.jpg"
+                  alt="ピンクを基調にした店内の雰囲気のイメージイラスト"
+                  fill
+                  sizes="(min-width: 1024px) 45vw, 90vw"
+                  style={{ objectPosition: focusOf('/images/visual/interior-cafe.jpg') }}
+                  className="object-cover"
+                />
+              </div>
+              <div className="mt-4 grid grid-cols-2 gap-4">
+                <div className="relative aspect-4/3 overflow-hidden rounded-lg">
+                  <Image
+                    src="/images/store/store-interior-01.jpg"
+                    alt="alouette 店内のカウンターとテーブル席"
+                    fill
+                    sizes="(min-width: 1024px) 22vw, 45vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="relative aspect-4/3 overflow-hidden rounded-lg">
+                  <Image
+                    src="/images/store/store-interior-02.jpg"
+                    alt="alouette 店内の入口側の様子"
+                    fill
+                    sizes="(min-width: 1024px) 22vw, 45vw"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <figcaption className="mt-3 text-[0.7rem] leading-relaxed text-ink-soft/70">
+                上：イメージイラスト／下：実際の店内
+              </figcaption>
+            </figure>
           </Reveal>
         </div>
       </section>

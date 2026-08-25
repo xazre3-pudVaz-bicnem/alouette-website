@@ -88,7 +88,7 @@ export default function ShopPage() {
             </SectionHeading>
             <p className="mt-5 text-[0.92rem] leading-[2] text-ink-soft">
               {store.access.station}の{store.access.exit}
-              を出て、徒歩4分。ピンクのネオンサインが目印です。
+              を出て、徒歩4分。「あるえっと」と書かれた白い看板が目印です。
             </p>
           </Reveal>
 
@@ -101,6 +101,7 @@ export default function ShopPage() {
                     alt={step.alt}
                     fill
                     sizes="(min-width: 1024px) 24vw, (min-width: 640px) 45vw, 90vw"
+                    style={{ objectPosition: step.imagePosition ?? 'center' }}
                     className="object-cover"
                   />
                   {step.isPlaceholder ? (

@@ -12,6 +12,7 @@ import JsonLd from '@/components/ui/JsonLd';
 import { store } from '@/data/store';
 import { featuredFaqs } from '@/data/faq';
 import { socialLinks } from '@/config/site';
+import { focusOf } from '@/data/visuals';
 import { faqJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 
@@ -77,12 +78,13 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="relative aspect-4/3 overflow-hidden rounded-lg">
+            <div className="relative aspect-video overflow-hidden rounded-lg">
               <Image
                 src="/images/visual/welcome.jpg"
                 alt="お客様を迎えるメイドのイメージイラスト"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
+                style={{ objectPosition: focusOf('/images/visual/welcome.jpg') }}
                 className="object-cover"
               />
             </div>
@@ -157,6 +159,7 @@ export default function ContactPage() {
           alt=""
           fill
           sizes="100vw"
+          style={{ objectPosition: focusOf('/images/visual/night-window.jpg') }}
           className="object-cover opacity-30"
         />
         <div

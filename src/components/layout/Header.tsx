@@ -173,7 +173,7 @@ export default function Header() {
           <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink-soft">
             {utilityNavigation.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="hover:text-rose">
+                <Link href={item.href} className="inline-block py-1.5 hover:text-rose">
                   {item.label}
                 </Link>
               </li>

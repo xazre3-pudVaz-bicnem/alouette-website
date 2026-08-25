@@ -1,23 +1,27 @@
 import Image from 'next/image';
 import { heroCopy } from '@/data/concept';
 import { store } from '@/data/store';
+import { focusOf } from '@/data/visuals';
 
 /**
  * ヒーロー。
  * 実際の店内写真を全面に敷き、テキストは最小限（ブランド名・コピー・営業時間）に留めます。
  * 予約導線はヘッダー／ヒーロー直下／SP固定ナビに置くため、ここにはボタンを並べません。
  */
+const HERO_IMAGE = '/images/hero/hero-main.jpg';
+
 export default function Hero() {
   return (
-    <section className="relative flex min-h-[86svh] items-end overflow-hidden bg-ink sm:min-h-[92svh]">
+    <section className="relative flex min-h-[86svh] items-end overflow-hidden bg-ink mt-[calc(var(--header-h)*-1)] sm:min-h-[92svh]">
       <Image
-        src="/images/hero/hero-main.jpg"
+        src={HERO_IMAGE}
         alt="夜のピンクのネオンが灯る、コンカフェ alouette のイメージイラスト"
         fill
         priority
         fetchPriority="high"
         sizes="100vw"
-        className="ken-burns object-cover object-[70%_50%] md:object-center"
+        style={{ objectPosition: focusOf(HERO_IMAGE) }}
+        className="ken-burns object-cover md:object-center"
       />
 
       {/* 文字が乗る左下だけを沈ませ、イラストの色はできるだけ残す */}

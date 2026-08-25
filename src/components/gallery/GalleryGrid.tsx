@@ -7,6 +7,7 @@ import {
   type GalleryCategory,
   type GalleryImage,
 } from '@/data/gallery';
+import { focusOf } from '@/data/visuals';
 
 /**
  * カテゴリ絞り込み＋ライトボックス付きのギャラリー。
@@ -104,6 +105,7 @@ export default function GalleryGrid({ images }: { images: GalleryImage[] }) {
                 fill
                 sizes="(min-width: 1024px) 24vw, (min-width: 640px) 32vw, 48vw"
                 loading={i < 4 ? 'eager' : 'lazy'}
+                style={{ objectPosition: focusOf(img.src) }}
                 className="object-cover transition-transform duration-[900ms] group-hover:scale-[1.06]"
               />
               {img.isPlaceholder || img.isIllustration ? (

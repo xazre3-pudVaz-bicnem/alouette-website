@@ -26,7 +26,7 @@ export default function Breadcrumbs({ items }: { items: Crumb[] }) {
                   </span>
                 ) : (
                   <>
-                    <Link href={crumb.path} className="hover:text-rose">
+                    <Link href={crumb.path} className="inline-block py-1.5 hover:text-rose">
                       {crumb.name}
                     </Link>
                     <span aria-hidden className="text-rose/40">

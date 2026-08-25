@@ -10,6 +10,8 @@ export type AccessStep = {
   body: string;
   image: string;
   alt: string;
+  /** 枠の比率と写真の比率が違うときの表示位置（CSS object-position と同じ書式） */
+  imagePosition?: string;
   isPlaceholder?: boolean;
 };
 
@@ -40,11 +42,12 @@ export const accessSteps: AccessStep[] = [
   },
   {
     step: 'GOAL',
-    title: 'ピンクのネオンが目印',
-    body: '1つ目の角のピンクのネオンが目印です。alouetteに到着です。',
-    image: '/images/access/access-step-04-placeholder.svg',
-    alt: 'alouette の店舗外観・ピンクのネオンサイン（写真準備中）',
-    isPlaceholder: true,
+    title: '「あるえっと」の看板が目印',
+    body: '1つ目の角、白い看板に「あるえっと」と書かれた入口が目印です。alouetteに到着です。',
+    image: '/images/store/store-exterior.jpg',
+    alt: 'alouette の店舗外観。「あるえっと」と書かれた白い看板のある入口',
+    // 看板が上部にあるため、中央ではなく上寄せで表示する
+    imagePosition: 'center top',
   },
 ];
 

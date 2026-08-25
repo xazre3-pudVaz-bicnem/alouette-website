@@ -9,6 +9,7 @@ import JsonLd from '@/components/ui/JsonLd';
 import { recruit } from '@/data/recruit';
 import { store } from '@/data/store';
 import { socialLinks } from '@/config/site';
+import { focusOf } from '@/data/visuals';
 import { faqJsonLd, jobPostingJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 
@@ -39,6 +40,7 @@ export default function RecruitPage() {
           fill
           priority
           sizes="100vw"
+          style={{ objectPosition: focusOf('/images/visual/cast-group.jpg') }}
           className="object-cover opacity-45"
         />
         <div

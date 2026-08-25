@@ -235,6 +235,8 @@ export const socialLinks = {
 | `public/images/store/store-interior-01.jpg` | 店内（カウンター＋テーブル） |
 | `public/images/store/store-interior-02.jpg` | 店内（入口側） |
 | `public/images/store/store-tables.jpg` | テーブル席 |
+| `public/images/store/store-counter-02.jpg` | カウンター内側から見た店内 |
+| `public/images/store/store-exterior.jpg` | **店舗外観（看板つき）**／アクセスページの道順GOAL・ギャラリー |
 | `public/images/og/og-image.jpg` | OGP画像（1200×630・ヒーロー＋ロゴで自動生成済み） |
 
 ### 掲載済み（イメージイラスト）
@@ -281,8 +283,7 @@ export const socialLinks = {
 | `access/access-step-01.jpg` | 小田急相模原駅 北口 | 1200×800 | 3:2 | 1 |
 | `access/access-step-02.jpg` | 駅前の信号（右折地点） | 1200×800 | 3:2 | 1 |
 | `access/access-step-03.jpg` | 南大野交番前（左折地点） | 1200×800 | 3:2 | 1 |
-| `access/access-step-04.jpg` | 店舗外観・ピンクのネオン | 1200×800 | 3:2 | 1 |
-| `store/store-exterior.jpg` | 外観（昼／夜） | 1200×900 | 4:3 | 1〜2 |
+| `store/store-exterior-night.jpg` | 外観（夜・ネオン点灯時） | 1200×900 | 4:3 | 1 |
 | `gallery/gallery-neon.jpg` | ネオンサイン | 1000×1000 | 1:1 | 1〜2 |
 | `gallery/gallery-costume.jpg` | 衣装 | 1000×1000 | 1:1 | 1〜3 |
 | `gallery/gallery-drink.jpg` | ドリンク | 1000×1000 | 1:1 | 2〜4 |
@@ -453,7 +454,9 @@ export const socialLinks = {
 | 公式 TikTok の URL | `src/config/site.ts` → `socialLinks.tiktok` | 同上 |
 | キャスト個人SNSのアカウント名 | `src/data/casts.ts` | LINEの文面から転記しました。誤りがないかご確認ください |
 | キャスト写真・プロフィールの掲載同意 | — | 6名分を公開しています。同意が取れていない方がいれば `isPublished: false` にしてください |
-| 駅からの道順の写真4点 | `public/images/access/` | 現在はプレースホルダー |
+| 駅からの道順の写真3点（STEP1〜3） | `public/images/access/` | GOAL（外観）は掲載済み。STEP1〜3はプレースホルダー |
+| **たこ焼き 880円 / ピザ 1,200円の掲載可否** | `src/data/menu.ts` | 店舗提供のポスター（`public/images/menu/poster-takoyaki.jpg` / `poster-pizza.jpg`）に価格が入っていますが、現行メニューか期間限定か不明なため未掲載です |
+| 外観写真の「営業中です 13時〜17時」の札 | — | サイト掲載の営業時間（18:00〜23:00）と異なります。昼営業もある場合はお知らせください |
 
 ### 表記を統一した箇所
 
