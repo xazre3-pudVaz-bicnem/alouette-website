@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import type { Metadata } from 'next';
 
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
@@ -35,12 +34,12 @@ export default function RecruitPage() {
       {/* ヒーロー */}
       <section className="relative overflow-hidden bg-ink">
         <Image
-          src="/images/store/store-interior-01.jpg"
+          src="/images/visual/cast-group.jpg"
           alt=""
           fill
           priority
           sizes="100vw"
-          className="object-cover opacity-40"
+          className="object-cover opacity-45"
         />
         <div
           aria-hidden
@@ -369,21 +368,25 @@ export default function RecruitPage() {
               </Reveal>
             ) : null}
 
-            <Reveal className="rounded-lg bg-ivory px-7 py-8" delay={120}>
-              <p className="eyebrow text-rose">Web Form</p>
-              <h3 className="mt-3 font-display text-[1.15rem] text-bordeaux">
-                応募フォームから
-              </h3>
-              <p className="mt-3 text-[0.86rem] leading-[1.9] text-ink-soft">
-                お問い合わせ種別で「求人応募」を選んでご送信ください。24時間受付です。
-              </p>
-              <Link
-                href="/contact/?type=recruit"
-                className="mt-5 inline-block rounded-full bg-bordeaux px-6 py-2.5 text-[0.85rem] text-ivory transition hover:bg-rose"
-              >
-                応募フォームへ
-              </Link>
-            </Reveal>
+            {socialLinks.x ? (
+              <Reveal className="rounded-lg bg-ivory px-7 py-8" delay={120}>
+                <p className="eyebrow text-rose">X (Twitter)</p>
+                <h3 className="mt-3 font-display text-[1.15rem] text-bordeaux">
+                  XのDMで応募する
+                </h3>
+                <p className="mt-3 text-[0.86rem] leading-[1.9] text-ink-soft">
+                  公式XのDMからご連絡ください。24時間受付、ご質問だけでもOKです。
+                </p>
+                <a
+                  href={socialLinks.x}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-5 inline-block rounded-full bg-bordeaux px-6 py-2.5 text-[0.85rem] text-ivory transition hover:bg-rose"
+                >
+                  公式Xを開く
+                </a>
+              </Reveal>
+            ) : null}
           </div>
 
           {socialLinks.line ? (
@@ -463,12 +466,16 @@ export default function RecruitPage() {
             >
               <span className="font-latin">{store.tel}</span>
             </a>
-            <Link
-              href="/contact/?type=recruit"
-              className="flex-1 rounded-full border border-ivory/50 px-7 py-4 text-[0.95rem] transition hover:bg-ivory/10"
-            >
-              応募フォームへ
-            </Link>
+            {socialLinks.x ? (
+              <a
+                href={socialLinks.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 rounded-full border border-ivory/50 px-7 py-4 text-[0.95rem] transition hover:bg-ivory/10"
+              >
+                XのDMで応募する
+              </a>
+            ) : null}
           </div>
           <p className="mt-4 text-[0.75rem] text-ivory/60">
             18歳以上（高校生不可）／電話受付 {store.telHours}・

@@ -3,7 +3,7 @@ title: '【サンプル記事】公開前に削除してください'
 date: 2026-08-01
 updated: 2026-08-01
 category: 'お知らせ'
-thumbnail: '/images/news/news-default-placeholder.svg'
+thumbnail: '/images/visual/night-window.jpg'
 excerpt: 'これはニュース機能の表示確認用サンプル記事です。本番公開前に src/content/news/sample-open-info.md を削除してください。'
 seoTitle: '【サンプル記事】ニュース機能の使い方'
 metaDescription: 'ニュース機能の表示確認用サンプル記事です。公開前に削除してください。'

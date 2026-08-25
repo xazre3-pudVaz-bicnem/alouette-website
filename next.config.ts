@@ -55,6 +55,8 @@ const nextConfig: NextConfig = {
    */
   async redirects() {
     return [
+      // 出勤情報ページは廃止したためトップへ（既にインデックスされている場合の受け皿）
+      { source: '/schedule', destination: '/', permanent: true },
       // 旧「Hello world!」投稿と、日付アーカイブ配下の投稿
       {
         source: '/:year(\\d{4})/:month(\\d{2})/:day(\\d{2})/:slug*',

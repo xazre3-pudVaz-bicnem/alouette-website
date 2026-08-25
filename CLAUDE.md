@@ -35,7 +35,6 @@
 | 店舗情報（NAP・営業時間） | `src/data/store.ts` |
 | 料金・メニュー | `src/data/menu.ts` |
 | キャスト | `src/data/casts.ts` |
-| 出勤情報 | `src/data/schedules.ts` |
 | 求人 | `src/data/recruit.ts` |
 | FAQ | `src/data/faq.ts` |
 | ギャラリー | `src/data/gallery.ts` |
@@ -44,6 +43,13 @@
 | ニュース記事 | `src/content/news/*.md` |
 
 住所・電話番号は `store.ts` の1か所だけを変更すれば全ページに反映される（NAP統一）。
+
+## 予約導線
+
+**入力フォームは作らない。** ご予約・お問い合わせ・求人応募はすべて
+**電話（`store.tel`）と公式XのDM（`socialLinks.x`）**に集約する。
+ボタンは `components/common/ReserveActions.tsx` の1か所で管理する。
+出勤情報（スケジュール）機能も持たない。
 
 ## URL
 
@@ -68,14 +74,15 @@
 - アニメーションは控えめに。`Reveal`（IntersectionObserver）、`ken-burns`、`twinkle`、`rise-in` のみ。
   外部アニメーションライブラリは入れない。
 - ヒーローに CTA ボタンを並べない。予約導線はヘッダー／ヒーロー直下の TodayBar／SP固定ナビに置く。
+- ヒーローと `public/images/visual/` はイメージイラスト。**実店舗の写真として説明しない**
+  （ギャラリーでは「イメージ」バッジを付ける）。
 - Tailwind v4 のため、素のクラスは `@layer components` に書く（ユーティリティを打ち消さないように）。
 
 ## 実装の約束
 
-- 既定は Server Component。`'use client'` は Header / MobileNav / Reveal / GalleryGrid /
-  ContactForm のみ。
+- 既定は Server Component。`'use client'` は Header / MobileNav / Reveal / GalleryGrid のみ。
 - 画像は `next/image`。ヒーローだけ `priority`。
-- 出勤情報・ニュースを扱うページは `export const revalidate = 3600`。
+- ニュースを扱うページは `export const revalidate = 3600`。
 - 日付は必ず `src/lib/date.ts` の JST ユーティリティを使う（サーバーがUTCでもズレないように）。
 - 個人情報を `console.log` に出さない。
 - 変更後は `npm run build` と `npm run lint` を通すこと。

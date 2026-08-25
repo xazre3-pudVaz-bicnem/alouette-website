@@ -51,7 +51,6 @@ export const navigation = [
   { href: '/', label: 'TOP', labelJa: 'トップ' },
   { href: '/concept/', label: 'CONCEPT', labelJa: 'お店について' },
   { href: '/cast/', label: 'CAST', labelJa: '女の子紹介' },
-  { href: '/schedule/', label: 'SCHEDULE', labelJa: '出勤情報' },
   { href: '/menu/', label: 'MENU', labelJa: '料金・メニュー' },
   { href: '/first-guide/', label: 'GUIDE', labelJa: '初めての方へ' },
   { href: '/gallery/', label: 'GALLERY', labelJa: '店内ギャラリー' },

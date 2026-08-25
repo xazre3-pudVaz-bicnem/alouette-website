@@ -14,7 +14,6 @@ const staticPages: {
   { path: '/', priority: 1, changeFrequency: 'daily' },
   { path: '/concept/', priority: 0.7, changeFrequency: 'monthly' },
   { path: '/cast/', priority: 0.9, changeFrequency: 'weekly' },
-  { path: '/schedule/', priority: 0.9, changeFrequency: 'daily' },
   { path: '/menu/', priority: 0.9, changeFrequency: 'monthly' },
   { path: '/first-guide/', priority: 0.8, changeFrequency: 'monthly' },
   { path: '/gallery/', priority: 0.6, changeFrequency: 'monthly' },

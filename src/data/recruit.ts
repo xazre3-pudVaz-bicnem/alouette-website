@@ -106,7 +106,7 @@ export const recruit = {
   applyFlow: [
     {
       title: 'ご応募',
-      body: 'お電話・Instagram・応募フォームのいずれかからご連絡ください。履歴書は不要です。',
+      body: 'お電話または公式XのDMからご連絡ください。履歴書は不要です。',
     },
     {
       title: 'ご連絡・日程調整',

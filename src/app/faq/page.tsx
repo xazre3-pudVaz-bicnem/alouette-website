@@ -105,13 +105,13 @@ export default function FaqPage() {
             </h2>
             <p className="mt-3 text-[0.87rem] leading-[1.95] text-ink-soft">
               お電話の受付時間は{store.telHours}（{store.closedDays}
-              定休）。WEBフォームは24時間受け付けています。
+              定休）。営業時間外は公式XのDMからもご連絡いただけます。
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <ActionLink href={`tel:${store.telHref}`} variant="outline">
                 {store.tel}
               </ActionLink>
-              <ActionLink href="/contact/">WEBで問い合わせる</ActionLink>
+              <ActionLink href="/contact/">ご予約・お問い合わせ</ActionLink>
             </div>
           </Reveal>
         </div>

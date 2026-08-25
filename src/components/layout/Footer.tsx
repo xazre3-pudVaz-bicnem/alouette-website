@@ -4,6 +4,7 @@ import { navigation, siteConfig, utilityNavigation } from '@/config/site';
 import { store } from '@/data/store';
 import { tagline } from '@/data/concept';
 import SocialLinks from '@/components/ui/SocialLinks';
+import ReserveActions from '@/components/common/ReserveActions';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -75,22 +76,9 @@ export default function Footer() {
             <div className="mt-10 rounded-lg border border-ivory/15 p-6">
               <p className="eyebrow text-blush">Reservation</p>
               <p className="mt-3 text-sm text-ivory/80">
-                お電話は営業時間内、WEBフォームは24時間受け付けています。
+                ご予約・お問い合わせはお電話またはXのDMで承っています。
               </p>
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={`tel:${store.telHref}`}
-                  className="flex-1 rounded-full border border-ivory/50 px-5 py-3 text-center text-sm transition hover:bg-ivory hover:text-bordeaux"
-                >
-                  電話で予約する
-                </a>
-                <Link
-                  href="/contact/"
-                  className="flex-1 rounded-full bg-petal px-5 py-3 text-center text-sm text-ink transition hover:bg-blush"
-                >
-                  WEBで予約する
-                </Link>
-              </div>
+              <ReserveActions tone="light" className="mt-5" />
             </div>
           </div>
         </div>

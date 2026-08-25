@@ -1,23 +1,24 @@
-import { Suspense } from 'react';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 import PageHeader from '@/components/layout/PageHeader';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
-import ContactForm from '@/components/contact/ContactForm';
+import ReserveActions from '@/components/common/ReserveActions';
+import StoreInfoTable from '@/components/common/StoreInfoTable';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
-import SocialLinks from '@/components/ui/SocialLinks';
+import ActionLink from '@/components/ui/ActionLink';
 import JsonLd from '@/components/ui/JsonLd';
 import { store } from '@/data/store';
 import { featuredFaqs } from '@/data/faq';
-import { activeSocialLinks } from '@/config/site';
+import { socialLinks } from '@/config/site';
 import { faqJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
   title: '予約・お問い合わせ｜相模原のコンカフェ alouette',
   description:
-    '相模原のコンカフェ alouette（あるえっと）へのご予約・お問い合わせはこちら。WEBフォームは24時間受付、お電話は17:00〜23:00（日曜定休）で承ります。求人応募もこのフォームからご連絡いただけます。',
+    '相模原のコンカフェ alouette（あるえっと）へのご予約・お問い合わせはお電話（042-705-4454／受付17:00〜23:00・日曜定休）またはXのDMで承ります。求人のご応募も同じ窓口です。小田急相模原駅から徒歩4分。',
   path: '/contact/',
 });
 
@@ -31,86 +32,98 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Reservation &amp; Contact"
         title="予約・お問い合わせ"
-        lead="ご予約、店舗へのご質問、求人応募はこちらから。WEBフォームは24時間受け付けています。"
+        lead="ご予約、店舗へのご質問、求人のご応募は、お電話またはXのDMで承っています。ご予約なしでのご来店も歓迎です。"
       />
       <Breadcrumbs items={[{ name: '予約・お問い合わせ', path: '/contact/' }]} />
 
-      {/* 連絡手段 */}
-      <section className="bg-ivory pt-10 pb-4">
-        <div className="container-page">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Reveal className="rounded-lg border border-rose/20 px-6 py-7">
-              <p className="eyebrow text-rose">By Phone</p>
-              <h2 className="mt-3 font-display text-[1.15rem] text-bordeaux">
-                お電話でのご予約
-              </h2>
-              <a
-                href={`tel:${store.telHref}`}
-                className="mt-4 block font-latin text-[1.7rem] tracking-[0.03em] text-bordeaux underline underline-offset-[6px]"
-              >
-                {store.tel}
-              </a>
-              <p className="mt-2 text-[0.8rem] text-ink-soft">
-                受付時間 {store.telHours}（{store.closedDays}定休）
-              </p>
-              <p className="mt-1 text-[0.78rem] text-ink-soft/75">
-                ※営業時間外は、下のフォームからご連絡ください。
-              </p>
-            </Reveal>
+      {/* 連絡方法 */}
+      <section className="bg-ivory py-12 md:py-16">
+        <div className="container-page grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+          <Reveal>
+            <SectionHeading eyebrow="How to contact">
+              ご連絡は、このどちらかで。
+            </SectionHeading>
+            <p className="mt-6 text-[0.94rem] leading-[2.1] text-ink-soft">
+              当店ではWEBの入力フォームはご用意していません。
+              お電話いただければその場でお席の空き状況をお答えできますし、
+              営業時間外や「まず雰囲気だけ聞きたい」という方はXのDMが便利です。
+            </p>
 
-            <Reveal className="rounded-lg border border-rose/20 px-6 py-7" delay={60}>
-              <p className="eyebrow text-rose">By Web</p>
-              <h2 className="mt-3 font-display text-[1.15rem] text-bordeaux">
-                WEBフォーム
+            <ReserveActions className="mt-9" size="lg" />
+
+            <div className="hairline mt-10 pt-8">
+              <h2 className="font-display text-[1.05rem] text-bordeaux">
+                お電話でお伝えいただけるとスムーズです
               </h2>
-              <p className="mt-4 text-[0.9rem] leading-[1.95] text-ink-soft">
-                24時間受付。ご予約・ご質問・求人応募のいずれもこのフォームから承ります。
-                内容を確認のうえ、担当者よりご連絡いたします。
+              <ul className="mt-4 space-y-2 text-[0.88rem] leading-[1.9] text-ink-soft">
+                {[
+                  'ご来店の日時',
+                  'ご来店の人数',
+                  'お名前（お呼びしやすいお名前で構いません）',
+                  '会いたいキャストがいればそのお名前',
+                ].map((item) => (
+                  <li key={item} className="flex gap-3">
+                    <span aria-hidden className="text-petal">
+                      ◇
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-[0.8rem] leading-[1.9] text-ink-soft/80">
+                ご予約なしでもご来店いただけますが、満席の場合はご案内できないことがあります。
               </p>
-              {activeSocialLinks.length > 0 ? (
-                <>
-                  <p className="mt-5 text-[0.8rem] text-ink-soft">
-                    SNSのDMからもご連絡いただけます。
-                  </p>
-                  <SocialLinks className="mt-3" size="sm" />
-                </>
-              ) : null}
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div className="relative aspect-4/3 overflow-hidden rounded-lg">
+              <Image
+                src="/images/visual/welcome.jpg"
+                alt="お客様を迎えるメイドのイメージイラスト"
+                fill
+                sizes="(min-width: 1024px) 45vw, 90vw"
+                className="object-cover"
+              />
+            </div>
+
+            <div className="mt-8">
+              <h2 className="eyebrow text-rose">Shop Information</h2>
+              <div className="mt-4">
+                <StoreInfoTable />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* フォーム */}
-      <section className="bg-ivory py-12 md:py-16">
-        <div className="container-page max-w-3xl">
-          <Reveal>
-            <SectionHeading eyebrow="Form">お問い合わせフォーム</SectionHeading>
-            <p className="mt-5 text-[0.9rem] leading-[1.95] text-ink-soft">
-              下記フォームに必要事項をご入力のうえ、送信してください。
-              <span className="text-rose">必須</span>
-              の項目は必ずご入力をお願いします。
-            </p>
+      {/* 求人応募 */}
+      <section className="border-y border-rose/12 bg-shell py-12 md:py-16">
+        <div className="container-page">
+          <Reveal className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <SectionHeading eyebrow="For Applicants" as="h2">
+                求人のご応募について
+              </SectionHeading>
+              <p className="mt-5 max-w-2xl text-[0.92rem] leading-[2] text-ink-soft">
+                キャストのご応募も、同じお電話番号
+                {socialLinks.x ? '・XのDM' : ''}
+                で受け付けています。履歴書は不要、面接のみのご参加もOKです。
+                お問い合わせの際に「求人の件で」とお伝えください。
+              </p>
+            </div>
+            <ActionLink href="/recruit/" variant="outline">
+              求人情報を見る
+            </ActionLink>
           </Reveal>
-
-          <div className="mt-9">
-            <Suspense
-              fallback={
-                <p className="text-sm text-ink-soft">フォームを読み込んでいます…</p>
-              }
-            >
-              <ContactForm />
-            </Suspense>
-          </div>
         </div>
       </section>
 
       {/* よくある質問 */}
-      <section className="border-t border-rose/12 bg-shell py-14 md:py-18">
+      <section className="bg-ivory py-14 md:py-18">
         <div className="container-page max-w-3xl">
           <Reveal>
-            <SectionHeading eyebrow="FAQ">
-              よくいただくご質問
-            </SectionHeading>
+            <SectionHeading eyebrow="FAQ">よくいただくご質問</SectionHeading>
           </Reveal>
 
           <dl className="mt-8 divide-y divide-rose/12 border-y border-rose/12">
@@ -126,13 +139,40 @@ export default function ContactPage() {
             ))}
           </dl>
 
-          <Reveal className="mt-8 text-[0.85rem] text-ink-soft">
-            <p>
+          <Reveal className="mt-8 flex flex-wrap items-center gap-4">
+            <ActionLink href="/faq/" variant="outline">
+              よくある質問をすべて見る
+            </ActionLink>
+            <p className="text-[0.85rem] text-ink-soft">
               {store.name}（{store.nameJa}）／{store.address.full}
-              <br />
-              {store.businessHoursNote}／{store.access.walkText}
             </p>
           </Reveal>
+        </div>
+      </section>
+
+      {/* 締めの導線 */}
+      <section className="relative overflow-hidden bg-ink py-16 text-ivory md:py-20">
+        <Image
+          src="/images/visual/night-window.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-30"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-br from-ink/92 via-bordeaux/70 to-ink/95"
+        />
+        <div className="container-page relative text-center">
+          <p className="eyebrow text-blush">Waiting for you</p>
+          <h2 className="mt-5 font-display text-[1.5rem] leading-[1.5] sm:text-[2rem]">
+            お電話1本で、今夜の席をご用意します。
+          </h2>
+          <ReserveActions
+            tone="light"
+            size="lg"
+            className="mx-auto mt-9 max-w-lg text-left sm:text-center"
+          />
         </div>
       </section>
     </>

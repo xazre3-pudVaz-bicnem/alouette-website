@@ -79,12 +79,12 @@ export default function Header() {
             <span className="font-latin text-[0.95rem]">{store.tel}</span>
           </a>
 
-          <Link
-            href="/contact/"
+          <a
+            href={`tel:${store.telHref}`}
             className="rounded-full bg-bordeaux px-4 py-2 text-[0.8rem] font-medium tracking-[0.08em] text-ivory transition hover:bg-rose sm:px-5 sm:text-[0.85rem]"
           >
-            WEB予約
-          </Link>
+            電話予約
+          </a>
 
           <button
             type="button"

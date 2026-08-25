@@ -11,7 +11,6 @@ import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ActionLink from '@/components/ui/ActionLink';
 import SocialLinks from '@/components/ui/SocialLinks';
-import { NoScheduleNote } from '@/components/schedule/ScheduleList';
 
 import { siteConfig, activeSocialLinks } from '@/config/site';
 import { charms, conceptLead, features } from '@/data/concept';
@@ -21,9 +20,8 @@ import { drinks, options } from '@/data/menu';
 import { realPhotos } from '@/data/gallery';
 import { recruit } from '@/data/recruit';
 import { accessSteps } from '@/data/access';
-import { getTodaySchedule } from '@/lib/schedule';
 import { getAllNews } from '@/lib/news';
-import { formatDateDot, formatDateJa } from '@/lib/date';
+import { formatDateDot } from '@/lib/date';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -39,7 +37,6 @@ export const revalidate = 3600;
 const yen = (n: number) => `${n.toLocaleString('ja-JP')}円`;
 
 export default async function HomePage() {
-  const today = getTodaySchedule();
   const casts = publishedCasts().slice(0, 4);
   const news = (await getAllNews()).slice(0, 3);
   const photos = realPhotos().slice(0, 4);
@@ -70,8 +67,8 @@ export default async function HomePage() {
             <div className="relative">
               <div className="relative aspect-4/5 overflow-hidden sm:aspect-3/4">
                 <Image
-                  src="/images/store/store-interior-02.jpg"
-                  alt="alouette 店内。タペストリーが並ぶ落ち着いたテーブル席"
+                  src="/images/visual/counter-neon.jpg"
+                  alt="ネオンの灯るカウンターで過ごす夜のイメージイラスト"
                   fill
                   sizes="(min-width: 1024px) 45vw, 90vw"
                   className="object-cover"
@@ -80,7 +77,7 @@ export default async function HomePage() {
               <div className="absolute -bottom-8 -left-4 hidden aspect-square w-40 overflow-hidden border-8 border-ivory sm:block lg:-left-10 lg:w-52">
                 <Image
                   src="/images/store/store-counter.jpg"
-                  alt="alouette のカウンター席"
+                  alt="alouette 店内のカウンター席"
                   fill
                   sizes="208px"
                   className="object-cover"
@@ -91,52 +88,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── 本日の出勤キャスト ────────────────────── */}
-      <section className="border-y border-rose/12 bg-shell py-16 md:py-20">
-        <div className="container-page">
-          <Reveal className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading eyebrow="Today's Cast">
-              本日の出勤
-              <span className="ml-3 font-latin text-base tracking-[0.1em] text-rose">
-                {formatDateJa(today.date)}
-              </span>
-            </SectionHeading>
-            <Link
-              href="/schedule/"
-              className="text-[0.82rem] text-rose underline underline-offset-[6px] hover:text-bordeaux"
-            >
-              週間の出勤予定を見る
-            </Link>
-          </Reveal>
-
-          <Reveal className="mt-8" delay={80}>
-            {today.entries.length > 0 ? (
-              <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                {today.entries.map((e) => (
-                  <li key={`${e.castSlug}-${e.start}`}>
-                    <CastCard cast={e.cast} />
-                    <p className="mt-2 font-latin text-[0.82rem] tracking-[0.08em] text-rose">
-                      {e.start} — {e.end}
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <div className="rounded-lg border border-dashed border-rose/30 bg-ivory px-6 py-10 text-center">
-                <NoScheduleNote isClosed={today.isClosed} />
-              </div>
-            )}
-          </Reveal>
-        </div>
-      </section>
-
       {/* ── キャスト紹介 ───────────────────────────── */}
       <section className="bg-ivory py-20 md:py-28">
         <div className="container-page">
           <Reveal className="max-w-2xl">
             <SectionHeading eyebrow="Cast">alouetteの女の子たち</SectionHeading>
             <p className="mt-6 text-[0.94rem] leading-[2.1] text-ink-soft">
-              明るく話しやすい女の子たちが待っています。プロフィールや出勤予定は、
+              明るく話しやすい女の子たちが待っています。プロフィールは
               キャストページからご覧いただけます。
             </p>
           </Reveal>

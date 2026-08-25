@@ -47,7 +47,7 @@ export type NewsPost = {
 };
 
 const NEWS_DIR = path.join(process.cwd(), 'src', 'content', 'news');
-const DEFAULT_THUMBNAIL = '/images/news/news-default-placeholder.svg';
+const DEFAULT_THUMBNAIL = '/images/visual/night-window.jpg';
 
 type RawFrontmatter = {
   title?: string;

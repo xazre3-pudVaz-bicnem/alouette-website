@@ -1,14 +1,17 @@
-import Link from 'next/link';
 import { store } from '@/data/store';
-import { formatDateJa } from '@/lib/date';
-import { getTodaySchedule } from '@/lib/schedule';
+import { socialLinks } from '@/config/site';
+import { formatDateJa, todayJst, weekdayIndex } from '@/lib/date';
+
+/** 日曜定休 */
+const CLOSED_WEEKDAY = 0;
 
 /**
  * ヒーロー直下の「本日の営業情報」。
  * ここが最初の予約導線になります（ヒーロー上にはボタンを置かない方針）。
  */
 export default function TodayBar() {
-  const today = getTodaySchedule();
+  const today = todayJst();
+  const isClosed = weekdayIndex(today) === CLOSED_WEEKDAY;
 
   return (
     <section
@@ -25,35 +28,24 @@ export default function TodayBar() {
               <span
                 aria-hidden
                 className={`inline-block h-1.5 w-1.5 rounded-full ${
-                  today.isClosed ? 'bg-ink-soft/40' : 'twinkle bg-petal'
+                  isClosed ? 'bg-ink-soft/40' : 'twinkle bg-petal'
                 }`}
               />
               Today
             </h2>
 
             <p className="text-[0.9rem] text-ink-soft">
-              <span className="text-bordeaux">{formatDateJa(today.date)}</span>
+              <span className="text-bordeaux">{formatDateJa(today)}</span>
               <span className="mx-2 text-rose/40">|</span>
-              {today.isClosed ? (
-                <span className="text-ink-soft">
-                  本日は定休日です（日曜定休）
-                </span>
+              {isClosed ? (
+                <span>本日は定休日です（日曜定休）</span>
               ) : (
                 <>
                   <span className="text-bordeaux">
                     {store.businessHours} 営業
                   </span>
                   <span className="mx-2 text-rose/40">|</span>
-                  {today.entries.length > 0 ? (
-                    <Link
-                      href="/schedule/"
-                      className="text-rose underline underline-offset-4"
-                    >
-                      本日の出勤キャスト {today.entries.length}名
-                    </Link>
-                  ) : (
-                    <span>出勤情報はSNSをご確認ください</span>
-                  )}
+                  <span>ご予約はお電話で承ります</span>
                 </>
               )}
             </p>
@@ -62,22 +54,44 @@ export default function TodayBar() {
           <div className="flex flex-col gap-2.5 sm:flex-row sm:items-center">
             <a
               href={`tel:${store.telHref}`}
-              className="group flex items-center justify-center gap-3 rounded-full border border-rose/30 px-6 py-3 transition hover:border-rose hover:bg-shell"
+              className="flex items-center justify-center gap-3 rounded-full bg-bordeaux px-7 py-3.5 text-ivory transition hover:bg-rose"
             >
-              <span className="font-latin text-[1.05rem] tracking-[0.06em] text-bordeaux">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                aria-hidden="true"
+              >
+                <path d="M5 4h3l2 5-2.4 1.4a12 12 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2.2 2A16 16 0 0 1 3 6.2 2 2 0 0 1 5 4z" />
+              </svg>
+              <span className="font-latin text-[1.05rem] tracking-[0.04em]">
                 {store.tel}
               </span>
-              <span className="text-[0.68rem] text-ink-soft">
-                {store.telHoursNote}
+              <span className="text-[0.68rem] text-blush">
+                受付 {store.telHours}
               </span>
             </a>
-            <Link
-              href="/contact/"
-              className="rounded-full bg-bordeaux px-8 py-3.5 text-center text-[0.9rem] tracking-[0.08em] text-ivory transition hover:bg-rose"
-            >
-              WEBで予約する
-              <span className="ml-2 text-[0.7rem] text-blush">24時間受付</span>
-            </Link>
+
+            {socialLinks.x ? (
+              <a
+                href={socialLinks.x}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 rounded-full border border-rose/35 px-6 py-3.5 text-[0.88rem] text-bordeaux transition hover:bg-shell"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-[15px] w-[15px]"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M4 3.5h4l4.3 6 5-6H20l-6.6 7.9L20.5 20.5h-4l-4.6-6.4-5.4 6.4H4.4l7-8.3z" />
+                </svg>
+                XのDMで相談
+              </a>
+            ) : null}
           </div>
         </div>
       </div>

@@ -5,17 +5,17 @@
  *   public/images/gallery/ または public/images/store/ に画像を置き、
  *   下の配列に 1 件追加してください。
  *
- * ⚠️ 実在のキャストに見えるAI生成の人物画像は掲載しないでください。
- *    写真が用意できるまでは placeholder のままにしておきます。
+ * ⚠️ 実在のキャストに見えるAI生成の人物写真は掲載しないでください。
+ *    「イメージ」カテゴリのイラストは実店舗の写真ではないため、
+ *    isIllustration: true を付けて画面上に「イメージ」と明示しています。
  */
 
 export const galleryCategories = [
   'すべて',
   '店内',
   'カウンター',
-  'ネオン',
-  '衣装',
   'キャスト',
+  'イメージ',
   'ドリンク',
   'フード',
   'イベント',
@@ -31,9 +31,15 @@ export type GalleryImage = {
   height: number;
   /** 写真が未提供でプレースホルダーを表示している場合 true */
   isPlaceholder?: boolean;
+  /**
+   * 実際の店内写真ではなく、世界観を表すイメージイラストの場合 true。
+   * 実店舗の様子と誤解されないよう、画面上に「イメージ」と表示します。
+   */
+  isIllustration?: boolean;
 };
 
 export const galleryImages: GalleryImage[] = [
+  // ── 実際の店内写真 ──
   {
     src: '/images/store/store-counter.jpg',
     alt: 'alouette 店内のカウンター席。ブリックタイルの壁にキャラクターのタペストリーが並ぶ',
@@ -62,15 +68,8 @@ export const galleryImages: GalleryImage[] = [
     width: 639,
     height: 426,
   },
-  {
-    src: '/images/gallery/gallery-neon-placeholder.svg',
-    alt: '店舗のピンクのネオンサイン（写真準備中）',
-    category: 'ネオン',
-    width: 1000,
-    height: 1000,
-    isPlaceholder: true,
-  },
-  // キャスト写真（店舗から提供されたもの）
+
+  // ── キャスト写真（店舗から提供されたもの） ──
   {
     src: '/images/cast/yui-main.jpg',
     alt: 'alouette のキャスト ゆい。ピンクのメイド衣装',
@@ -102,36 +101,78 @@ export const galleryImages: GalleryImage[] = [
   {
     src: '/images/cast/yunya-main.jpg',
     alt: 'alouette のキャスト ゆにゃ。白いフリルの衣装',
-    category: '衣装',
+    category: 'キャスト',
     width: 1477,
     height: 1108,
   },
+
+  // ── イメージイラスト（実際の店内写真ではありません） ──
   {
-    src: '/images/gallery/gallery-drink-placeholder.svg',
-    alt: 'ドリンクの写真（準備中）',
+    src: '/images/visual/counter-neon.jpg',
+    alt: 'ネオンの灯るカウンターで過ごす夜のイメージイラスト',
+    category: 'イメージ',
+    width: 1672,
+    height: 941,
+    isIllustration: true,
+  },
+  {
+    src: '/images/visual/interior-cafe.jpg',
+    alt: 'ピンクを基調にした店内のイメージイラスト',
+    category: 'イメージ',
+    width: 1672,
+    height: 941,
+    isIllustration: true,
+  },
+  {
+    src: '/images/visual/night-window.jpg',
+    alt: '夜景の見える席で過ごすひとときのイメージイラスト',
+    category: 'イメージ',
+    width: 1672,
+    height: 941,
+    isIllustration: true,
+  },
+  {
+    src: '/images/visual/cast-group.jpg',
+    alt: 'キャストたちがお出迎えするイメージイラスト',
+    category: 'イメージ',
+    width: 1672,
+    height: 941,
+    isIllustration: true,
+  },
+  {
+    src: '/images/visual/counter-day.jpg',
+    alt: 'カウンター越しにお話しするイメージイラスト',
+    category: 'イメージ',
+    width: 1672,
+    height: 941,
+    isIllustration: true,
+  },
+  {
+    src: '/images/visual/bar-drink.jpg',
+    alt: 'カウンターでドリンクを楽しむイメージイラスト',
     category: 'ドリンク',
-    width: 1000,
-    height: 1000,
-    isPlaceholder: true,
+    width: 1672,
+    height: 941,
+    isIllustration: true,
   },
   {
-    src: '/images/gallery/gallery-food-placeholder.svg',
-    alt: 'フードの写真（準備中）',
+    src: '/images/visual/food-tray.jpg',
+    alt: 'ドリンクとスイーツをお持ちするイメージイラスト',
     category: 'フード',
-    width: 1000,
-    height: 1000,
-    isPlaceholder: true,
+    width: 1672,
+    height: 941,
+    isIllustration: true,
   },
   {
-    src: '/images/gallery/gallery-event-placeholder.svg',
-    alt: 'イベントの写真（準備中）',
+    src: '/images/visual/duo.jpg',
+    alt: 'イベントの日のにぎやかな店内のイメージイラスト',
     category: 'イベント',
-    width: 1000,
-    height: 1000,
-    isPlaceholder: true,
+    width: 1672,
+    height: 941,
+    isIllustration: true,
   },
 ];
 
 /** 実写のみ（トップページの抜粋などで使用） */
 export const realPhotos = (): GalleryImage[] =>
-  galleryImages.filter((i) => !i.isPlaceholder);
+  galleryImages.filter((i) => !i.isPlaceholder && !i.isIllustration);

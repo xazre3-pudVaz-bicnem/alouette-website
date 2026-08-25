@@ -66,8 +66,8 @@ export default function FirstGuidePage() {
           <Reveal delay={100}>
             <div className="relative aspect-4/3 overflow-hidden rounded-lg">
               <Image
-                src="/images/store/store-counter.jpg"
-                alt="alouette 店内のカウンター席"
+                src="/images/visual/counter-day.jpg"
+                alt="カウンター越しに気軽にお話しできる雰囲気のイメージイラスト"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
                 className="object-cover"
@@ -322,7 +322,7 @@ export default function FirstGuidePage() {
 
       <ContactCta
         heading="準備はできましたか。"
-        lead="ご予約はお電話またはWEBフォームから。当日のご来店も歓迎です。"
+        lead="ご予約はお電話またはXのDMから。当日のご来店も歓迎です。"
       />
     </>
   );

@@ -64,8 +64,8 @@ export default function MenuPage() {
           <Reveal delay={100}>
             <div className="relative aspect-4/3 overflow-hidden rounded-lg lg:aspect-square">
               <Image
-                src="/images/store/store-tables.jpg"
-                alt="alouette 店内のテーブル席"
+                src="/images/visual/bar-drink.jpg"
+                alt="カウンターでドリンクを楽しむイメージイラスト"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
                 className="object-cover"

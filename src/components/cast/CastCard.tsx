@@ -1,13 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { isPhotoPending, type Cast } from '@/data/casts';
-import { getNextShift } from '@/lib/schedule';
-import { formatDateJa } from '@/lib/date';
 
 type Props = { cast: Cast; priority?: boolean };
 
 export default function CastCard({ cast, priority = false }: Props) {
-  const nextShift = cast.isDummy ? undefined : getNextShift(cast.slug);
   const photoPending = isPhotoPending(cast);
 
   const inner = (
@@ -29,11 +26,6 @@ export default function CastCard({ cast, priority = false }: Props) {
         {cast.isDummy || photoPending ? (
           <span className="absolute top-3 left-3 rounded-full bg-ivory/90 px-3 py-1 text-[0.68rem] tracking-[0.12em] text-rose">
             写真準備中
-          </span>
-        ) : null}
-        {nextShift ? (
-          <span className="absolute right-0 bottom-0 bg-bordeaux/90 px-3 py-1.5 text-[0.7rem] tracking-[0.06em] text-ivory">
-            次回 {formatDateJa(nextShift.date)} {nextShift.start}〜
           </span>
         ) : null}
       </div>

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 
 import PageHeader from '@/components/layout/PageHeader';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
@@ -9,12 +8,13 @@ import Reveal from '@/components/ui/Reveal';
 import ActionLink from '@/components/ui/ActionLink';
 import SocialLinks from '@/components/ui/SocialLinks';
 import { publishedCasts, hasRealCasts } from '@/data/casts';
+import { store } from '@/data/store';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
   title: 'キャスト・女の子紹介｜相模原のコンカフェ alouette',
   description:
-    '相模原のコンカフェ alouette（あるえっと）に在籍するキャストのご紹介です。プロフィールやメッセージ、次回の出勤予定をチェックして、お気に入りの女の子に会いにきてください。小田急相模原駅から徒歩4分。',
+    '相模原のコンカフェ alouette（あるえっと）に在籍するキャストのご紹介です。プロフィールやメッセージをチェックして、お気に入りの女の子に会いにきてください。小田急相模原駅から徒歩4分。',
   path: '/cast/',
 });
 
@@ -29,7 +29,7 @@ export default function CastIndexPage() {
       <PageHeader
         eyebrow="Cast"
         title="alouetteの女の子たち"
-        lead="明るくて話しやすい女の子たちが、楽しい時間を演出します。気になる子のプロフィールと出勤予定をチェックしてみてください。"
+        lead="明るくて話しやすい女の子たちが、楽しい時間を演出します。気になる子のプロフィールをチェックしてみてください。"
       />
       <Breadcrumbs items={[{ name: '女の子紹介', path: '/cast/' }]} />
 
@@ -41,8 +41,8 @@ export default function CastIndexPage() {
                 キャスト情報は準備中です
               </p>
               <p className="mx-auto mt-3 max-w-lg text-[0.88rem] leading-[1.95] text-ink-soft">
-                現在プロフィールの準備を進めています。公開までの間、最新の出勤情報や
-                在籍キャストの様子はSNSでご覧いただけます。
+                現在プロフィールの準備を進めています。公開までの間、
+                在籍キャストの様子は公式SNSでご覧いただけます。
               </p>
               <SocialLinks className="mt-6 justify-center" size="sm" />
             </Reveal>
@@ -59,17 +59,11 @@ export default function CastIndexPage() {
           <Reveal className="mt-16 hairline pt-10">
             <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
               <p className="text-[0.9rem] leading-[1.95] text-ink-soft">
-                今日どの子が出勤しているかは、
-                <Link
-                  href="/schedule/"
-                  className="mx-1 text-rose underline underline-offset-4"
-                >
-                  出勤情報ページ
-                </Link>
-                でご確認いただけます。
+                会いたい子の出勤日は、お店にお問い合わせいただくのがいちばん確実です。
+                ご予約の際に女の子のお名前をお伝えください。
               </p>
-              <ActionLink href="/schedule/" variant="outline">
-                出勤情報を見る
+              <ActionLink href={`tel:${store.telHref}`} variant="outline">
+                電話で聞いてみる
               </ActionLink>
             </div>
           </Reveal>
@@ -78,7 +72,7 @@ export default function CastIndexPage() {
 
       <ContactCta
         heading="会いたい子がいたら、ご予約を。"
-        lead="ご来店の日時が決まっていれば、お電話またはWEBフォームからご連絡ください。"
+        lead="ご来店の日時が決まっていれば、お電話またはXのDMからご連絡ください。"
       />
     </>
   );

@@ -12,22 +12,22 @@ export default function Hero() {
     <section className="relative flex min-h-[86svh] items-end overflow-hidden bg-ink sm:min-h-[92svh]">
       <Image
         src="/images/hero/hero-main.jpg"
-        alt="alouette 店内のカウンター席。ブリックタイルの壁とタペストリーが並ぶ空間"
+        alt="夜のピンクのネオンが灯る、コンカフェ alouette のイメージイラスト"
         fill
         priority
         fetchPriority="high"
         sizes="100vw"
-        className="ken-burns object-cover object-center"
+        className="ken-burns object-cover object-[70%_50%] md:object-center"
       />
 
-      {/* 写真を沈ませて文字を読みやすくする */}
+      {/* 文字が乗る左下だけを沈ませ、イラストの色はできるだけ残す */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-ink/92 via-ink/55 to-ink/35"
+        className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/45 to-ink/10"
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-bordeaux/25 mix-blend-multiply"
+        className="absolute inset-0 bg-gradient-to-r from-ink/80 via-ink/25 to-transparent md:via-ink/10"
       />
 
       {/* きらめき */}

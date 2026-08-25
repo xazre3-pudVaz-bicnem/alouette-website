@@ -56,7 +56,7 @@ export default function ShopPage() {
             </div>
             <p className="mt-3 text-[0.75rem] text-ink-soft/75">
               電話の受付時間は{store.telHours}（{store.closedDays}
-              定休）です。営業時間外はWEBフォームからご連絡ください。
+              定休）です。営業時間外は公式XのDMからご連絡ください。
             </p>
 
             <SocialLinks className="mt-8" />
@@ -140,7 +140,7 @@ export default function ShopPage() {
                 {store.tel}
               </ActionLink>
               <ActionLink href="/contact/" variant="outline">
-                WEBで問い合わせる
+                ご予約・お問い合わせ
               </ActionLink>
             </div>
           </Reveal>

@@ -57,8 +57,8 @@ export default function ConceptPage() {
           <Reveal delay={100}>
             <div className="relative aspect-4/5 overflow-hidden">
               <Image
-                src="/images/store/store-interior-01.jpg"
-                alt="alouette 店内のカウンターとテーブル席。フィギュア棚とモニターのある空間"
+                src="/images/visual/interior-cafe.jpg"
+                alt="ピンクを基調にした店内の雰囲気のイメージイラスト"
                 fill
                 sizes="(min-width: 1024px) 45vw, 90vw"
                 className="object-cover"

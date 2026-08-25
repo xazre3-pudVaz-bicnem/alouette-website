@@ -7,6 +7,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ContactCta from '@/components/common/ContactCta';
 import Reveal from '@/components/ui/Reveal';
 import ActionLink from '@/components/ui/ActionLink';
+import ReserveActions from '@/components/common/ReserveActions';
 import SectionHeading from '@/components/ui/SectionHeading';
 import {
   castSocialLinks,
@@ -14,8 +15,6 @@ import {
   findCast,
   hasProfile,
 } from '@/data/casts';
-import { getUpcomingForCast } from '@/lib/schedule';
-import { formatDateJa } from '@/lib/date';
 import { buildMetadata } from '@/lib/seo';
 
 type Params = { params: Promise<{ slug: string }> };
@@ -36,7 +35,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
     description: [
       `相模原のコンカフェ alouette（あるえっと）のキャスト「${cast.name}」のページです。`,
       cast.catchphrase ? `${cast.catchphrase}。` : '',
-      '出勤予定をチェックして、ぜひ会いにきてください。小田急相模原駅から徒歩4分。',
+      'メッセージやプロフィールをチェックして、ぜひ会いにきてください。小田急相模原駅から徒歩4分。',
     ].join(''),
     path: `/cast/${cast.slug}/`,
     image: cast.mainImage.endsWith('.svg') ? undefined : cast.mainImage,
@@ -49,7 +48,6 @@ export default async function CastDetailPage({ params }: Params) {
   if (!cast) notFound();
 
   const socials = castSocialLinks(cast);
-  const shifts = getUpcomingForCast(cast.slug, 14);
   const others = detailPageCasts()
     .filter((c) => c.slug !== cast.slug)
     .slice(0, 4);
@@ -103,8 +101,7 @@ export default async function CastDetailPage({ params }: Params) {
 
               {!hasProfile(cast) ? (
                 <p className="mt-6 rounded-lg bg-shell px-5 py-4 text-[0.85rem] leading-[1.9] text-ink-soft">
-                  プロフィールは準備中です。出勤予定は下のスケジュールから、
-                  普段の様子はSNSからご覧いただけます。
+                  プロフィールは準備中です。ご来店の際にぜひ直接お話しください。
                 </p>
               ) : null}
 
@@ -203,43 +200,19 @@ export default async function CastDetailPage({ params }: Params) {
           </section>
         ) : null}
 
-        {/* 出勤予定 */}
+        {/* 会いに行く導線 */}
         <section className="border-t border-rose/12 bg-ivory py-14 md:py-20">
           <div className="container-page">
-            <Reveal className="flex flex-wrap items-end justify-between gap-4">
-              <SectionHeading eyebrow="Schedule" as="h2">
-                {cast.name}の出勤予定
-              </SectionHeading>
-              <Link
-                href="/schedule/"
-                className="text-[0.82rem] text-rose underline underline-offset-[6px]"
-              >
-                全員の出勤情報を見る
-              </Link>
-            </Reveal>
-
-            <Reveal className="mt-7" delay={60}>
-              {shifts.length > 0 ? (
-                <ul className="grid gap-px overflow-hidden rounded-lg bg-rose/15 sm:grid-cols-2 lg:grid-cols-3">
-                  {shifts.map((s) => (
-                    <li
-                      key={`${s.date}-${s.start}`}
-                      className="flex items-baseline justify-between gap-4 bg-ivory px-6 py-4"
-                    >
-                      <span className="text-[0.9rem] text-bordeaux">
-                        {formatDateJa(s.date)}
-                      </span>
-                      <span className="font-latin text-[0.9rem] tracking-[0.06em] text-rose">
-                        {s.start} — {s.end}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="rounded-lg border border-dashed border-rose/30 px-6 py-8 text-center text-sm text-ink-soft">
-                  今後2週間の出勤予定は未登録です。最新情報はSNSをご確認ください。
-                </p>
-              )}
+            <Reveal className="mx-auto max-w-2xl rounded-lg bg-shell px-6 py-9 text-center sm:px-10">
+              <p className="eyebrow text-rose">Reservation</p>
+              <h2 className="mt-4 font-display text-[1.2rem] leading-relaxed text-bordeaux sm:text-[1.4rem]">
+                {cast.name}に会いにいく
+              </h2>
+              <p className="mt-4 text-[0.88rem] leading-[1.95] text-ink-soft">
+                出勤日はお店にお問い合わせいただくのがいちばん確実です。
+                ご予約の際に「{cast.name}に会いたい」とお伝えください。
+              </p>
+              <ReserveActions className="mt-7 text-left sm:text-center" />
             </Reveal>
           </div>
         </section>

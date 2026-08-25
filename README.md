@@ -13,7 +13,7 @@ WordPress から Next.js（App Router）へ全面リニューアルしたもの�
 
 1. [開発をはじめる](#1-開発をはじめる)
 2. [ディレクトリ構成](#2-ディレクトリ構成)
-3. [お問い合わせフォームの設定](#3-お問い合わせフォームの設定)
+3. [ご予約・お問い合わせの導線](#3-ご予約お問い合わせの導線)
 4. [運用マニュアル（更新のしかた）](#4-運用マニュアル更新のしかた)
 5. [必要な写真の一覧](#5-必要な写真の一覧)
 6. [Vercelへのデプロイ手順](#6-vercelへのデプロイ手順)
@@ -49,7 +49,6 @@ src/
 │   ├── concept/                 コンセプト                /concept/
 │   ├── cast/                    キャスト一覧              /cast/
 │   │   └── [slug]/              キャスト個別              /cast/xxx/
-│   ├── schedule/                出勤情報                  /schedule/
 │   ├── menu/                    料金・メニュー            /menu/
 │   ├── first-guide/             初めての方へ              /first-guide/
 │   ├── news/                    ニュース一覧              /news/
@@ -59,7 +58,6 @@ src/
 │   ├── faq/                     よくある質問              /faq/
 │   ├── recruit/                 求人情報                  /recruit/
 │   ├── contact/                 予約・お問い合わせ        /contact/
-│   │   └── actions.ts           フォーム送信のServer Action
 │   ├── privacy-policy/          プライバシーポリシー      /privacy-policy/
 │   ├── not-found.tsx            404ページ
 │   ├── sitemap.ts               sitemap.xml
@@ -72,7 +70,6 @@ src/
 │   ├── store.ts                 店舗情報（住所・電話・営業時間）
 │   ├── menu.ts                  料金・ドリンク・フード・オプション
 │   ├── casts.ts                 キャスト
-│   ├── schedules.ts             出勤情報
 │   ├── recruit.ts               求人条件
 │   ├── faq.ts                   よくある質問
 │   ├── gallery.ts               ギャラリー写真
@@ -84,48 +81,27 @@ src/
 └── lib/                     日付・SEO・構造化データなどの共通処理
 
 public/images/               画像
-├── brand/  hero/  cast/  store/  menu/  gallery/  recruit/  access/  news/  og/
+├── brand/  hero/  visual/  cast/  store/  gallery/  access/  og/
 ```
 
 **★ が付いているファイル・フォルダだけを編集すれば、サイトの内容は更新できます。**
 
 ---
 
-## 3. お問い合わせフォームの設定
+## 3. ご予約・お問い合わせの導線
 
-フォームは Server Action から [Resend](https://resend.com) 経由でメールを送信します。
-以下の3つの環境変数が必要です。
+**当サイトに入力フォームはありません。** ご予約・お問い合わせ・求人応募はすべて
+**お電話**と**公式XのDM**の2つに集約しています（メール送信の設定や環境変数は不要です）。
 
-| 環境変数 | 内容 | 例 |
-| --- | --- | --- |
-| `RESEND_API_KEY` | Resend の API キー | `re_xxxxxxxx...` |
-| `CONTACT_TO_EMAIL` | 問い合わせの受信先（カンマ区切りで複数可） | `owner@example.com` |
-| `CONTACT_FROM_EMAIL` | 送信元アドレス（Resendで認証済みドメイン） | `alouette <noreply@alouette0405.com>` |
+| 導線 | 設定場所 |
+| --- | --- |
+| 電話番号・受付時間 | `src/data/store.ts` の `tel` / `telHours` |
+| XのDM | `src/config/site.ts` の `socialLinks.x` |
 
-### 設定手順
-
-1. https://resend.com にアカウントを作成する
-2. **Domains** で `alouette0405.com` を追加し、表示された DNS レコード（SPF / DKIM）を
-   ドメインの DNS に登録して認証を完了する
-3. **API Keys** で API キーを発行する
-4. ローカルは `.env.local`、本番は Vercel の
-   **Project → Settings → Environment Variables** に上記3つを登録する
-   （Production・Preview の両方に登録してください）
-5. 登録後に再デプロイすると反映されます
-
-> 環境変数が未設定のあいだは、フォーム送信時に
-> 「送信に失敗しました。お手数ですが、お電話でご連絡ください」と表示され、
-> 電話番号が案内されます（画面が壊れることはありません）。
-
-### 実装されているスパム・不正対策
-
-- **honeypot**: 人間には見えない `website` 項目。入力があれば送信を破棄します
-- **レート制限**: 同一IPから10分間に5件まで
-- **入力チェック**: zod によるサーバー側バリデーション（必須項目・メール形式・電話番号形式・文字数）
-- 個人情報はブラウザのコンソールにもサーバーログにも出力しません
-- 送信エラー時も入力内容は消えません（入力し直しが不要）
-
----
+- ボタンの実体は `src/components/common/ReserveActions.tsx` の1コンポーネントです。
+  文言を変えたいときはここだけを直せば、全ページのボタンに反映されます。
+- `socialLinks.x` を空文字にすると、Xのボタンは自動的に消えて電話のみになります。
+- `/contact/` は旧WordPressから引き継ぐURLのため、**削除せず**「ご連絡方法のご案内ページ」として残しています。
 
 ## 4. 運用マニュアル（更新のしかた）
 
@@ -166,26 +142,7 @@ public/images/               画像
 - 横位置の写真で顔が中央から外れる場合は `imagePosition: '62% 30%'` のように表示位置を調整できます。
 - **本人の同意がない写真・情報、本名・年齢・住所などは掲載しないでください。**
 
-### 4.2 出勤情報を更新する
-
-`src/data/schedules.ts` の `schedules` 配列に、日付ごとに1行ずつ追加します。
-
-```ts
-export const schedules: ScheduleEntry[] = [
-  { date: '2026-08-10', castSlug: 'mai',  start: '18:00', end: '23:00' },
-  { date: '2026-08-10', castSlug: 'yuka', start: '20:00', end: '23:00', note: '20時から合流' },
-  { date: '2026-08-11', castSlug: 'mai',  start: '18:00', end: '22:00' },
-];
-```
-
-- `date` は `YYYY-MM-DD`（日本時間）
-- `castSlug` は `casts.ts` の `slug` と一致させてください
-- **過ぎた日付は自動的にトップページ・出勤情報ページから消えます**ので、古い行は残しても構いません
-- 出勤が登録されていない日は「本日の出勤情報はSNSをご確認ください」と表示されます
-- 日曜日は自動的に「定休日」と表示されます
-- 表示は1時間ごとに更新されます（ISR）。すぐ反映したい場合は Vercel で再デプロイしてください
-
-### 4.3 ニュース・イベントを投稿する
+### 4.2 ニュース・イベントを投稿する
 
 `src/content/news/` に Markdown ファイル（`.md`）を追加します。
 **ファイル名がそのまま URL になります**（`summer-event.md` → `/news/summer-event/`）。
@@ -218,7 +175,7 @@ links:
 - すべての記事に `Article` の構造化データが出力されます
 - **`sample-open-info.md` はサンプル記事です。公開前に削除してください。**
 
-### 4.4 料金・店舗情報を変更する
+### 4.3 料金・店舗情報を変更する
 
 | 変更したいもの | ファイル |
 | --- | --- |
@@ -232,7 +189,7 @@ links:
 住所・電話番号は `store.ts` の1か所を直せば、ヘッダー・フッター・各ページ・構造化データの
 すべてに反映されます（NAP統一）。
 
-### 4.5 SNSリンクを設定する
+### 4.4 SNSリンクを設定する
 
 `src/config/site.ts` の `socialLinks` を編集します。
 
@@ -278,7 +235,27 @@ export const socialLinks = {
 | `public/images/store/store-interior-01.jpg` | 店内（カウンター＋テーブル） |
 | `public/images/store/store-interior-02.jpg` | 店内（入口側） |
 | `public/images/store/store-tables.jpg` | テーブル席 |
-| `public/images/og/og-image.jpg` | OGP画像（1200×630・店内写真＋ロゴで自動生成済み） |
+| `public/images/og/og-image.jpg` | OGP画像（1200×630・ヒーロー＋ロゴで自動生成済み） |
+
+### 掲載済み（イメージイラスト）
+
+`public/images/visual/` と `public/images/hero/hero-main.jpg` は、お店の世界観を表す
+**イラスト**です（実際の店内写真ではありません）。ギャラリーでは「イメージ」バッジを付けています。
+
+| ファイル | 使用箇所 |
+| --- | --- |
+| `hero/hero-main.jpg` | トップのヒーロー（夜の外観） |
+| `visual/counter-neon.jpg` | トップのコンセプト／各ページ末尾のCTA背景 |
+| `visual/interior-cafe.jpg` | コンセプトページ |
+| `visual/counter-day.jpg` | 初めての方へ |
+| `visual/bar-drink.jpg` | 料金・メニュー／ギャラリー（ドリンク） |
+| `visual/food-tray.jpg` | ギャラリー（フード） |
+| `visual/welcome.jpg` | 予約・お問い合わせ |
+| `visual/cast-group.jpg` | 求人ページのヒーロー |
+| `visual/duo.jpg` | ギャラリー（イベント） |
+| `visual/night-window.jpg` | ニュースの既定アイキャッチ |
+
+差し替えるときは同じファイル名で置き換えれば、参照箇所すべてに反映されます。
 
 ### 掲載済み（店舗から提供されたキャスト写真）
 
@@ -347,9 +324,8 @@ export const socialLinks = {
    - Framework Preset は自動で **Next.js** が選ばれます（そのままでOK）
    - Build Command / Output Directory も変更不要です
 
-3. **環境変数を登録**（[3. お問い合わせフォームの設定](#3-お問い合わせフォームの設定) 参照）
-   - `RESEND_API_KEY` / `CONTACT_TO_EMAIL` / `CONTACT_FROM_EMAIL`
-   - Production と Preview の両方にチェックを入れてください
+3. **環境変数**
+   - このサイトは環境変数を使用していません。設定は不要です。
 
 4. **Deploy** を押す
    - `xxxxx.vercel.app` の Preview URL が発行されます
@@ -361,7 +337,7 @@ export const socialLinks = {
    - [ ] 料金が現行サイトと一致している（男性3,000円／女性2,500円／キャストドリンク1,000円／チェキ1,000円）
    - [ ] 求人の時給が現行サイトと一致している（1,300円〜／バック20%〜）
    - [ ] 住所・電話番号・営業時間が全ページで統一されている
-   - [ ] **お問い合わせフォームから実際に送信し、メールが届くことを確認する**
+   - [ ] 電話ボタン（tel:リンク）とXのDMボタンが正しく開く
    - [ ] `/menu/` `/recruit/` `/shop/` `/contact/` が404にならない
    - [ ] `/sitemap.xml` `/robots.txt` が表示される
    - [ ] [リッチリザルトテスト](https://search.google.com/test/rich-results)で構造化データにエラーがない
@@ -425,7 +401,7 @@ export const socialLinks = {
    - プロパティ `https://alouette0405.com` を確認（未登録なら追加）
    - **サイトマップ** に `sitemap.xml` を送信
    - **URL検査** から主要ページのインデックス登録をリクエスト
-     （`/` `/menu/` `/cast/` `/schedule/` `/recruit/` `/shop/` `/first-guide/`）
+     （`/` `/menu/` `/cast/` `/recruit/` `/shop/` `/first-guide/` `/gallery/`）
    - 1〜2週間後に **ページ（インデックス作成）** レポートで 404 が出ていないか確認
 
 8. **Googleビジネスプロフィールの確認**
@@ -441,7 +417,7 @@ export const socialLinks = {
 - [ ] 独自ドメインが Vercel を向き、`https://alouette0405.com` で新サイトが表示されている
 - [ ] SSL（HTTPS）が有効になっている
 - [ ] `www` あり・なしのどちらでアクセスしても新サイトが表示される
-- [ ] お問い合わせフォームから送信したメールが届くことを確認した
+- [ ] 電話ボタンとXのDMボタンが正しく動作することを確認した
 - [ ] `/menu/` `/recruit/` `/shop/` `/contact/` が新サイトで正しく表示される
 - [ ] Search Console にサイトマップを送信し、主要ページのインデックスを申請した
 - [ ] **WordPress のバックアップ（ファイル＋データベース）をローカルに保存した**

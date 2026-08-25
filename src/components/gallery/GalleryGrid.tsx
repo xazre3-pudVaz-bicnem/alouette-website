@@ -106,9 +106,9 @@ export default function GalleryGrid({ images }: { images: GalleryImage[] }) {
                 loading={i < 4 ? 'eager' : 'lazy'}
                 className="object-cover transition-transform duration-[900ms] group-hover:scale-[1.06]"
               />
-              {img.isPlaceholder ? (
+              {img.isPlaceholder || img.isIllustration ? (
                 <span className="absolute top-2 left-2 rounded-full bg-ivory/90 px-2.5 py-0.5 text-[0.62rem] tracking-[0.08em] text-rose">
-                  準備中
+                  {img.isPlaceholder ? '準備中' : 'イメージ'}
                 </span>
               ) : null}
             </button>
