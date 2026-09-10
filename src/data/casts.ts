@@ -7,6 +7,12 @@
  *   3. isPublished を true にすると公開されます
  *   4. displayOrder の小さい順に並びます
  *
+ * ▼ 写真を差し替える場合
+ *   同じファイル名で上書きせず、新しいファイル名で置いて mainImage を書き換えてください
+ *   （例: yui-main-202609.jpg → yui-main-202612.jpg）。同じ名前のままだと、
+ *   ブラウザや配信サーバーのキャッシュに古い写真が残ることがあります。
+ *   古い写真ファイルは削除して構いません。
+ *
  * ▼ 退店した場合
  *   配列から該当の項目を削除し、public/images/cast/ の写真も削除してください。
  *
@@ -69,7 +75,7 @@ export const casts: Cast[] = [
     name: 'ゆい',
     nickname: 'ゆいちゃん',
     catchphrase: 'めちゃくちゃ飲めます',
-    mainImage: '/images/cast/yui-main.jpg',
+    mainImage: '/images/cast/yui-main-202609.jpg',
     gallery: [],
     birthday: '9月8日',
     favorites: ['甘いもの'],
@@ -87,7 +93,7 @@ export const casts: Cast[] = [
     name: 'ぴゆ',
     nickname: 'ぴゆちゃん',
     catchphrase: 'お酒が飲める合法ロリ',
-    mainImage: '/images/cast/piyu-main.jpg',
+    mainImage: '/images/cast/piyu-main-202609.jpg',
     gallery: [],
     birthday: '10月8日',
     favorites: ['ちいかわのうさぎ'],

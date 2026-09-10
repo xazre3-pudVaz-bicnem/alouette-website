@@ -4,7 +4,7 @@
 WordPress から Next.js（App Router）へ全面リニューアルしたものです。
 
 - 本番URL（切り替え後）: https://alouette0405.com
-- 技術構成: Next.js 16 (App Router) / TypeScript / Tailwind CSS v4 / Resend
+- 技術構成: Next.js 16 (App Router) / TypeScript / Tailwind CSS v4
 - ホスティング: Vercel
 
 ---
@@ -27,7 +27,6 @@ WordPress から Next.js（App Router）へ全面リニューアルしたもの�
 
 ```bash
 npm install
-cp .env.example .env.local   # Windowsは copy .env.example .env.local
 npm run dev                  # http://localhost:3000
 ```
 
@@ -104,6 +103,18 @@ public/images/               画像
 - `/contact/` は旧WordPressから引き継ぐURLのため、**削除せず**「ご連絡方法のご案内ページ」として残しています。
 
 ## 4. 運用マニュアル（更新のしかた）
+
+### 4.0 写真の差し替え（重要）
+
+写真を入れ替えるときは、**同じファイル名で上書きしないでください。**
+ブラウザや配信サーバー（Vercel の画像最適化）のキャッシュに古い写真が残り、
+しばらく新しい写真が表示されないことがあります。
+
+1. 新しい写真を**別のファイル名**で置く（例：`yui-main-202609.jpg` → `yui-main-202612.jpg`）
+2. `src/data/casts.ts`（キャスト）や `src/data/gallery.ts`（ギャラリー）のパスを書き換える
+3. 古い写真ファイルは削除して構いません
+
+ファイル名に年月を付けておくと、いつ差し替えたかも分かって便利です。
 
 ### 4.1 キャストを追加する
 
@@ -220,9 +231,9 @@ export const socialLinks = {
 
 ## 5. 必要な写真の一覧
 
-現在サイトに入っている写真は、旧サイトから引き継いだ **実際の店内写真4点** と **ロゴ** のみです。
-以下は「プレースホルダー（仮画像）」になっている箇所です。撮影後、同じパスに置き換えるか、
-データファイルのパスを差し替えてください。
+掲載中の写真と、まだ「プレースホルダー（仮画像）」になっている箇所の一覧です。
+写真を入れる・差し替えるときは、新しいファイル名で置いてデータファイルのパスを書き換えてください
+（[4.0 写真の差し替え](#40-写真の差し替え重要) 参照）。
 
 ### 掲載済み（旧サイトから移行）
 
@@ -230,7 +241,6 @@ export const socialLinks = {
 | --- | --- |
 | `public/images/brand/logo.png` | ロゴ（ヘッダー） |
 | `public/images/brand/logo-square.png` | ロゴ（フッター・アプリアイコン） |
-| `public/images/hero/hero-main.jpg` | トップのヒーロー（カウンター） |
 | `public/images/store/store-counter.jpg` | カウンター席 |
 | `public/images/store/store-interior-01.jpg` | 店内（カウンター＋テーブル） |
 | `public/images/store/store-interior-02.jpg` | 店内（入口側） |
@@ -257,14 +267,14 @@ export const socialLinks = {
 | `visual/duo.jpg` | ギャラリー（イベント） |
 | `visual/night-window.jpg` | ニュースの既定アイキャッチ |
 
-差し替えるときは同じファイル名で置き換えれば、参照箇所すべてに反映されます。
+差し替えるときは**新しいファイル名**で置き、`src/data/visuals.ts` と参照箇所のパスを書き換えてください（下記「写真の差し替え」参照）。
 
 ### 掲載済み（店舗から提供されたキャスト写真）
 
 | ファイル | キャスト |
 | --- | --- |
-| `public/images/cast/yui-main.jpg` | ゆい |
-| `public/images/cast/piyu-main.jpg` | ぴゆ |
+| `public/images/cast/yui-main-202609.jpg` | ゆい（2026年9月差し替え） |
+| `public/images/cast/piyu-main-202609.jpg` | ぴゆ（2026年9月差し替え） |
 | `public/images/cast/amai-main.jpg` | あまい |
 | `public/images/cast/eru-main.jpg` | える |
 | `public/images/cast/yunya-main.jpg` | ゆにゃ |

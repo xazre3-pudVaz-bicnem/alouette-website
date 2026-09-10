@@ -86,15 +86,15 @@ export const galleryImages: GalleryImage[] = [
 
   // ── キャスト写真（店舗から提供されたもの） ──
   {
-    src: '/images/cast/yui-main.jpg',
-    alt: 'alouette のキャスト ゆい。ピンクのメイド衣装',
+    src: '/images/cast/yui-main-202609.jpg',
+    alt: 'alouette のキャスト ゆい。白と黒のメイド衣装',
     category: 'キャスト',
     width: 960,
-    height: 1488,
+    height: 1336,
   },
   {
-    src: '/images/cast/piyu-main.jpg',
-    alt: 'alouette のキャスト ぴゆ',
+    src: '/images/cast/piyu-main-202609.jpg',
+    alt: 'alouette のキャスト ぴゆ。水色のフリル衣装',
     category: 'キャスト',
     width: 1108,
     height: 1477,
