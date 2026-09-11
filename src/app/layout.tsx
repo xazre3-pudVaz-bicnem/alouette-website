@@ -1,9 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import {
-  Cormorant_Garamond,
-  Shippori_Mincho,
-  Zen_Kaku_Gothic_New,
-} from 'next/font/google';
+import { Cormorant_Garamond, Shippori_Mincho } from 'next/font/google';
 import './globals.css';
 
 import Header from '@/components/layout/Header';
@@ -21,18 +17,10 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 });
 
-/* 和文本文 */
-const zenKaku = Zen_Kaku_Gothic_New({
-  weight: ['400', '500', '700'],
-  subsets: ['latin'],
-  variable: '--font-zen-kaku',
-  display: 'swap',
-  preload: false,
-});
-
-/* 和文見出し（明朝で大人っぽさを出す） */
+/* 和文見出し（明朝で大人っぽさを出す）。本文は端末フォント（globals.css の --font-sans）。
+   和文Webフォントは1ウェイトで約100KBのCSSになるため、見出しに必要な400だけ読み込む */
 const shippori = Shippori_Mincho({
-  weight: ['400', '500'],
+  weight: ['400'],
   subsets: ['latin'],
   variable: '--font-shippori',
   display: 'swap',
@@ -72,7 +60,7 @@ export default function RootLayout({
   return (
     <html
       lang="ja"
-      className={`${cormorant.variable} ${zenKaku.variable} ${shippori.variable} antialiased`}
+      className={`${cormorant.variable} ${shippori.variable} antialiased`}
     >
       <body>
         {/* JS が無効でもコンテンツが読めるようにする（reveal は初期状態が透明のため） */}

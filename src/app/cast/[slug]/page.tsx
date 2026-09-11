@@ -76,7 +76,8 @@ export default async function CastDetailPage({ params }: Params) {
                 src={cast.mainImage}
                 alt={`${cast.name}のプロフィール写真`}
                 fill
-                priority
+                preload
+                fetchPriority="high"
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 style={{ objectPosition: cast.imagePosition ?? 'center' }}
                 className="object-cover"

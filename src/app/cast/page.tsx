@@ -51,7 +51,7 @@ export default function CastIndexPage() {
           <ul className="grid grid-cols-2 gap-x-5 gap-y-12 lg:grid-cols-4 lg:gap-x-8">
             {casts.map((cast, i) => (
               <Reveal as="li" key={cast.slug} delay={(i % 4) * 60}>
-                <CastCard cast={cast} priority={i < 4} />
+                <CastCard cast={cast} preload={i < 2} />
               </Reveal>
             ))}
           </ul>

@@ -7,7 +7,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ContactCta from '@/components/common/ContactCta';
 import Reveal from '@/components/ui/Reveal';
 import SocialLinks from '@/components/ui/SocialLinks';
-import { getAllNews } from '@/lib/news';
+import { getAllNews, isEventEnded } from '@/lib/news';
 import { formatDateDot } from '@/lib/date';
 import { buildMetadata } from '@/lib/seo';
 
@@ -45,12 +45,19 @@ export default async function NewsIndexPage() {
                         alt=""
                         fill
                         sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
-                        priority={i < 3}
+                        preload={i === 0}
+                        // 縦長ポスターはタイトルのある上部を見せる
+                        style={{ objectPosition: post.isPoster ? 'center top' : 'center' }}
                         className="object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]"
                       />
                       <span className="absolute top-3 left-3 rounded-full bg-ivory/92 px-3 py-1 text-[0.68rem] tracking-[0.1em] text-rose">
                         {post.category}
                       </span>
+                      {isEventEnded(post) ? (
+                        <span className="absolute top-3 right-3 rounded-full bg-ink-soft/85 px-3 py-1 text-[0.68rem] tracking-[0.1em] text-ivory">
+                          終了
+                        </span>
+                      ) : null}
                     </div>
                     <time
                       dateTime={post.date}
@@ -58,7 +65,7 @@ export default async function NewsIndexPage() {
                     >
                       {formatDateDot(post.date)}
                     </time>
-                    <h2 className="mt-2 font-display text-[1.08rem] leading-snug text-bordeaux">
+                    <h2 className="mt-2 font-display text-[1.08rem] leading-snug text-balance text-bordeaux">
                       {post.title}
                     </h2>
                     {post.excerpt ? (

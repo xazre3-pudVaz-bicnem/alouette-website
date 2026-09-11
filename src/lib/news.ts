@@ -4,6 +4,8 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import remarkHtml from 'remark-html';
+import { readImageSize } from '@/lib/image-size';
+import { todayJst } from '@/lib/date';
 
 /**
  * ニュース／イベント記事の読み込み。
@@ -32,6 +34,16 @@ export type NewsPost = {
   category: NewsCategory;
   /** アイキャッチ画像 */
   thumbnail: string;
+  /** アイキャッチの縦横サイズ（ビルド時に画像から読み取る。SVGなどは undefined） */
+  thumbnailSize?: { width: number; height: number };
+  /** アイキャッチが縦長のポスターか（切り取らずに全体を表示する） */
+  isPoster: boolean;
+  /** イベントの開催日（YYYY-MM-DD）。カテゴリ「イベント」の記事で指定する */
+  eventDate?: string;
+  /** イベント名（構造化データ用。未設定なら title） */
+  eventName?: string;
+  /** イベントの料金（円）。本文にも同じ金額を書くこと */
+  eventPrice?: number;
   /** 一覧に出る要約 */
   excerpt: string;
   /** SEO 用タイトル（未設定なら title を使用） */
@@ -59,6 +71,9 @@ type RawFrontmatter = {
   seoTitle?: string;
   metaDescription?: string;
   links?: NewsLink[];
+  eventDate?: string | Date;
+  eventName?: string;
+  eventPrice?: number;
   published?: boolean;
   isSample?: boolean;
 };
@@ -96,13 +111,21 @@ export const getAllNews = async (): Promise<NewsPost[]> => {
 
       const contentHtml = await markdownToHtml(content);
 
+      const thumbnail = fm.thumbnail || DEFAULT_THUMBNAIL;
+      const thumbnailSize = readImageSize(thumbnail);
+
       const post: NewsPost = {
         slug: file.replace(/\.md$/, ''),
         title: fm.title ?? '（タイトル未設定）',
         date: toDateString(fm.date),
         updated: fm.updated ? toDateString(fm.updated) : undefined,
         category: isCategory(fm.category) ? fm.category : 'お知らせ',
-        thumbnail: fm.thumbnail || DEFAULT_THUMBNAIL,
+        thumbnail,
+        thumbnailSize,
+        isPoster: !!thumbnailSize && thumbnailSize.height > thumbnailSize.width,
+        eventDate: fm.eventDate ? toDateString(fm.eventDate) : undefined,
+        eventName: fm.eventName,
+        eventPrice: typeof fm.eventPrice === 'number' ? fm.eventPrice : undefined,
         excerpt: fm.excerpt ?? '',
         seoTitle: fm.seoTitle,
         metaDescription: fm.metaDescription,
@@ -130,3 +153,7 @@ export const getNewsSlugs = async (): Promise<string[]> => {
   const all = await getAllNews();
   return all.map((p) => p.slug);
 };
+
+/** 開催日が過ぎたイベントか（日本時間で判定） */
+export const isEventEnded = (post: NewsPost): boolean =>
+  !!post.eventDate && post.eventDate < todayJst();

@@ -148,13 +148,19 @@ export const jobPostingJsonLd = (datePosted: string): Json => ({
   url: absoluteUrl('/recruit/'),
 });
 
-/** Event（ニュースのカテゴリが「イベント」のとき） */
+/**
+ * Event（ニュースのカテゴリが「イベント」で、開催日 eventDate がある記事）。
+ * startDate は記事の公開日ではなく開催日。時刻はポスターに無い限り付けない。
+ */
 export const eventJsonLd = (args: {
   name: string;
   description: string;
+  /** 開催日（YYYY-MM-DD） */
   startDate: string;
   url: string;
   image: string;
+  /** 料金（円）。本文に表示している金額と同じもの */
+  price?: number;
 }): Json => ({
   '@context': 'https://schema.org',
   '@type': 'Event',
@@ -177,6 +183,17 @@ export const eventJsonLd = (args: {
     },
   },
   organizer: { '@type': 'Organization', name: store.name, url: siteConfig.url },
+  ...(args.price !== undefined
+    ? {
+        offers: {
+          '@type': 'Offer',
+          price: args.price,
+          priceCurrency: 'JPY',
+          availability: 'https://schema.org/InStock',
+          url: args.url,
+        },
+      }
+    : {}),
 });
 
 /** Article（ニュース記事） */

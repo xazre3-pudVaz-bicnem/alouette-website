@@ -8,12 +8,10 @@ import StoreInfoTable from '@/components/common/StoreInfoTable';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ActionLink from '@/components/ui/ActionLink';
-import JsonLd from '@/components/ui/JsonLd';
 import { store } from '@/data/store';
 import { featuredFaqs } from '@/data/faq';
 import { socialLinks } from '@/config/site';
 import { focusOf } from '@/data/visuals';
-import { faqJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -28,8 +26,6 @@ const contactFaqs = featuredFaqs().slice(0, 4);
 export default function ContactPage() {
   return (
     <>
-      <JsonLd data={faqJsonLd(contactFaqs)} />
-
       <PageHeader
         eyebrow="Reservation &amp; Contact"
         title="予約・お問い合わせ"

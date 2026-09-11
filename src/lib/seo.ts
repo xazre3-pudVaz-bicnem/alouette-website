@@ -8,6 +8,8 @@ type BuildMetadataArgs = {
   path: string;
   /** OGP 画像（未指定ならサイト共通画像） */
   image?: string;
+  /** OGP 画像の実寸（未指定なら共通画像の 1200×630） */
+  imageSize?: { width: number; height: number };
   noindex?: boolean;
   type?: 'website' | 'article';
   publishedTime?: string;
@@ -22,6 +24,7 @@ export const buildMetadata = ({
   description,
   path,
   image = siteConfig.ogImage,
+  imageSize = { width: 1200, height: 630 },
   noindex = false,
   type = 'website',
   publishedTime,
@@ -44,7 +47,7 @@ export const buildMetadata = ({
       description,
       siteName: `${siteConfig.name}（${siteConfig.nameJa}）`,
       locale: siteConfig.locale,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+      images: [{ url: ogImage, ...imageSize, alt: title }],
       ...(publishedTime ? { publishedTime } : {}),
       ...(modifiedTime ? { modifiedTime } : {}),
     },

@@ -7,8 +7,8 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ContactCta from '@/components/common/ContactCta';
 import JsonLd from '@/components/ui/JsonLd';
 import Reveal from '@/components/ui/Reveal';
-import { getAllNews, getNewsBySlug } from '@/lib/news';
-import { formatDateDot, formatDateLong } from '@/lib/date';
+import { getAllNews, getNewsBySlug, isEventEnded } from '@/lib/news';
+import { formatDateDot, formatDateJa, formatDateLong } from '@/lib/date';
 import { articleJsonLd, eventJsonLd } from '@/lib/jsonld';
 import { absoluteUrl, buildMetadata } from '@/lib/seo';
 
@@ -41,6 +41,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       `相模原のコンカフェ alouette（あるえっと）からのお知らせです。`,
     path: `/news/${post.slug}/`,
     image: post.thumbnail.endsWith('.svg') ? undefined : post.thumbnail,
+    imageSize: post.thumbnailSize,
     type: 'article',
     publishedTime: post.date,
     modifiedTime: post.updated ?? post.date,
@@ -58,6 +59,7 @@ export default async function NewsDetailPage({ params }: Params) {
   const related = all.filter((p) => p.slug !== post.slug).slice(0, 3);
   const url = absoluteUrl(`/news/${post.slug}/`);
   const image = absoluteUrl(post.thumbnail);
+  const ended = isEventEnded(post);
 
   return (
     <>
@@ -71,14 +73,16 @@ export default async function NewsDetailPage({ params }: Params) {
           image,
         })}
       />
-      {post.category === 'イベント' && !post.isSample ? (
+      {/* 開催日が指定されたイベント記事だけ Event を出す（startDate は公開日ではなく開催日） */}
+      {post.category === 'イベント' && post.eventDate && !post.isSample ? (
         <JsonLd
           data={eventJsonLd({
-            name: post.title,
+            name: post.eventName ?? post.title,
             description: post.metaDescription ?? post.excerpt,
-            startDate: post.date,
+            startDate: post.eventDate,
             url,
             image,
+            price: post.eventPrice,
           })}
         />
       ) : null}
@@ -104,7 +108,7 @@ export default async function NewsDetailPage({ params }: Params) {
             </span>
           </div>
 
-          <h1 className="mt-5 font-display text-[1.65rem] leading-[1.55] text-bordeaux sm:text-[2.1rem]">
+          <h1 className="mt-5 font-display text-[1.65rem] leading-[1.55] text-balance text-bordeaux sm:text-[2.1rem]">
             {post.title}
           </h1>
 
@@ -112,6 +116,34 @@ export default async function NewsDetailPage({ params }: Params) {
             <p className="mt-3 text-[0.75rem] text-ink-soft/70">
               最終更新：{formatDateLong(post.updated)}
             </p>
+          ) : null}
+
+          {post.eventDate ? (
+            <dl className="mt-7 grid gap-px overflow-hidden rounded-lg bg-rose/15 sm:grid-cols-2">
+              <div className="bg-shell px-5 py-4">
+                <dt className="font-latin text-[0.7rem] tracking-[0.22em] text-rose">
+                  DATE
+                </dt>
+                <dd className="mt-1 font-display text-[1.15rem] text-bordeaux">
+                  {formatDateJa(post.eventDate)}
+                  {ended ? (
+                    <span className="ml-3 rounded-full bg-ink-soft/80 px-2.5 py-0.5 align-middle font-sans text-[0.68rem] tracking-[0.08em] text-ivory">
+                      終了しました
+                    </span>
+                  ) : null}
+                </dd>
+              </div>
+              {post.eventPrice !== undefined ? (
+                <div className="bg-shell px-5 py-4">
+                  <dt className="font-latin text-[0.7rem] tracking-[0.22em] text-rose">
+                    PRICE
+                  </dt>
+                  <dd className="mt-1 font-display text-[1.15rem] text-bordeaux">
+                    {post.eventPrice.toLocaleString('ja-JP')}円
+                  </dd>
+                </div>
+              ) : null}
+            </dl>
           ) : null}
 
           {post.isSample ? (
@@ -126,16 +158,30 @@ export default async function NewsDetailPage({ params }: Params) {
         </header>
 
         <div className="container-page mt-8 max-w-3xl">
-          <div className="relative aspect-video overflow-hidden rounded-lg bg-shell">
+          {post.isPoster && post.thumbnailSize ? (
+            // 縦長のポスターは文字が切れないよう、切り取らずに全体を表示する
             <Image
               src={post.thumbnail}
-              alt=""
-              fill
-              priority
-              sizes="(min-width: 768px) 720px, 100vw"
-              className="object-cover"
+              alt={`${post.title}の告知ポスター`}
+              width={post.thumbnailSize.width}
+              height={post.thumbnailSize.height}
+              preload
+              fetchPriority="high"
+              sizes="(min-width: 640px) 480px, 100vw"
+              className="mx-auto h-auto w-full max-w-[480px] rounded-lg shadow-soft"
             />
-          </div>
+          ) : (
+            <div className="relative aspect-video overflow-hidden rounded-lg bg-shell">
+              <Image
+                src={post.thumbnail}
+                alt=""
+                fill
+                preload
+                sizes="(min-width: 768px) 720px, 100vw"
+                className="object-cover"
+              />
+            </div>
+          )}
         </div>
 
         <div
@@ -186,6 +232,7 @@ export default async function NewsDetailPage({ params }: Params) {
                         alt=""
                         fill
                         sizes="(min-width: 640px) 30vw, 90vw"
+                        style={{ objectPosition: p.isPoster ? 'center top' : 'center' }}
                         className="object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]"
                       />
                     </div>

@@ -46,12 +46,14 @@ export default function Header() {
           className="flex shrink-0 items-center gap-2.5"
           aria-label={`${siteConfig.name}（${siteConfig.nameJa}）トップページ`}
         >
+          {/* 表示は高さ36〜40px。実寸（478px）で指定すると1080px幅の画像が全ページで先読みされ、
+              ヒーロー画像の読み込みを遅らせていた */}
           <Image
             src={siteConfig.logo}
             alt=""
-            width={478}
-            height={364}
-            priority
+            width={53}
+            height={40}
+            loading="eager"
             className="h-9 w-auto sm:h-10"
           />
           <span className="sr-only">

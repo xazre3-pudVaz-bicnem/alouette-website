@@ -6,6 +6,7 @@ import Hero from '@/components/home/Hero';
 import TodayBar from '@/components/home/TodayBar';
 import CastCard from '@/components/cast/CastCard';
 import ContactCta from '@/components/common/ContactCta';
+import MapEmbed from '@/components/common/MapEmbed';
 import PriceBoard from '@/components/common/PriceBoard';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
@@ -114,9 +115,9 @@ export default async function HomePage() {
 
           <Reveal className="mt-12" delay={80}>
             <ul className="grid grid-cols-2 gap-x-5 gap-y-10 lg:grid-cols-4 lg:gap-x-8">
-              {casts.map((cast, i) => (
+              {casts.map((cast) => (
                 <li key={cast.slug}>
-                  <CastCard cast={cast} priority={i < 2} />
+                  <CastCard cast={cast} />
                 </li>
               ))}
             </ul>
@@ -428,15 +429,11 @@ export default async function HomePage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="overflow-hidden rounded-lg border border-rose/15">
-              <iframe
-                src={store.access.googleMapsEmbedUrl}
-                title={`${store.name}の地図（${store.address.full}）`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-[320px] w-full sm:h-[420px]"
-              />
-            </div>
+            <MapEmbed
+              src={store.access.googleMapsEmbedUrl}
+              title={`${store.name}の地図（${store.address.full}）`}
+              className="h-[320px] sm:h-[420px]"
+            />
             <p className="mt-3 text-[0.75rem] text-ink-soft/75">
               {accessSteps[accessSteps.length - 1].body}
             </p>

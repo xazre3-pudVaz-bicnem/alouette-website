@@ -5,6 +5,7 @@ import PageHeader from '@/components/layout/PageHeader';
 import Breadcrumbs from '@/components/layout/Breadcrumbs';
 import ContactCta from '@/components/common/ContactCta';
 import StoreInfoTable from '@/components/common/StoreInfoTable';
+import MapEmbed from '@/components/common/MapEmbed';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ActionLink from '@/components/ui/ActionLink';
@@ -63,15 +64,11 @@ export default function ShopPage() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="overflow-hidden rounded-lg border border-rose/15">
-              <iframe
-                src={store.access.googleMapsEmbedUrl}
-                title={`${store.name}の地図（${store.address.full}）`}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                className="h-[360px] w-full lg:h-[520px]"
-              />
-            </div>
+            <MapEmbed
+              src={store.access.googleMapsEmbedUrl}
+              title={`${store.name}の地図（${store.address.full}）`}
+              className="h-[360px] lg:h-[520px]"
+            />
             <p className="mt-4 text-[0.85rem] leading-[1.95] text-ink-soft">
               {areaNote}
             </p>

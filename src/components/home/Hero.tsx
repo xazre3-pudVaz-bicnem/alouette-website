@@ -5,7 +5,8 @@ import { focusOf } from '@/data/visuals';
 
 /**
  * ヒーロー。
- * 実際の店内写真を全面に敷き、テキストは最小限（ブランド名・コピー・営業時間）に留めます。
+ * 世界観のイメージイラストを全面に敷き、テキストは最小限（ブランド名・コピー・営業時間）に留めます。
+ * この画像がトップの LCP になるため preload + fetchPriority="high" を付けています。
  * 予約導線はヘッダー／ヒーロー直下／SP固定ナビに置くため、ここにはボタンを並べません。
  */
 const HERO_IMAGE = '/images/hero/hero-main.jpg';
@@ -17,7 +18,7 @@ export default function Hero() {
         src={HERO_IMAGE}
         alt="夜のピンクのネオンが灯る、コンカフェ alouette のイメージイラスト"
         fill
-        priority
+        preload
         fetchPriority="high"
         sizes="100vw"
         style={{ objectPosition: focusOf(HERO_IMAGE) }}

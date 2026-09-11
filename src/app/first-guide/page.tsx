@@ -9,13 +9,11 @@ import PriceBoard from '@/components/common/PriceBoard';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ActionLink from '@/components/ui/ActionLink';
-import JsonLd from '@/components/ui/JsonLd';
 import { drinks, options, orderFlow, usageNotes } from '@/data/menu';
 import { featuredFaqs } from '@/data/faq';
 import { store } from '@/data/store';
 import { accessSteps } from '@/data/access';
 import { focusOf } from '@/data/visuals';
-import { faqJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -30,8 +28,6 @@ const guideFaqs = featuredFaqs();
 export default function FirstGuidePage() {
   return (
     <>
-      <JsonLd data={faqJsonLd(guideFaqs)} />
-
       <PageHeader
         eyebrow="First Guide"
         title="初めての方へ"

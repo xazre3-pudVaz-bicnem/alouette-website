@@ -8,7 +8,6 @@ import PriceBoard from '@/components/common/PriceBoard';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ActionLink from '@/components/ui/ActionLink';
-import JsonLd from '@/components/ui/JsonLd';
 import {
   drinks,
   extraCharges,
@@ -19,7 +18,6 @@ import {
 } from '@/data/menu';
 import { faqs } from '@/data/faq';
 import { focusOf } from '@/data/visuals';
-import { faqJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
@@ -37,8 +35,6 @@ const priceFaqs = faqs.filter((f) => f.category === '料金');
 export default function MenuPage() {
   return (
     <>
-      <JsonLd data={faqJsonLd(priceFaqs)} />
-
       <PageHeader
         eyebrow="System &amp; Menu"
         title="料金・メニュー"

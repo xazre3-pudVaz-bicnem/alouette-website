@@ -38,7 +38,8 @@ export default function RecruitPage() {
           src="/images/visual/cast-group.jpg"
           alt=""
           fill
-          priority
+          preload
+          fetchPriority="high"
           sizes="100vw"
           style={{ objectPosition: focusOf('/images/visual/cast-group.jpg') }}
           className="object-cover opacity-45"

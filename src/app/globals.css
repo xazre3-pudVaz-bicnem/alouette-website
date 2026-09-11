@@ -6,15 +6,20 @@
   --color-ink: #1c0d14; /* 夜の黒（わずかに赤み） */
   --color-ink-soft: #3a2029;
   --color-bordeaux: #6d1b36; /* 濃いボルドー */
-  --color-rose: #c2416b; /* ローズピンク（テキスト・線） */
+  --color-rose: #b83a63; /* ローズピンク（テキスト・線）。淡いピンク背景でも 4.5:1 以上のコントラストを確保 */
   --color-petal: #ec7fa4; /* メインのピンク */
   --color-blush: #f7d9e3; /* ソフトピンク */
   --color-shell: #fdf1f4; /* ごく淡いピンク */
   --color-ivory: #fcf9f5; /* アイボリー */
   --color-champagne: #c2a35d; /* シャンパンゴールド */
 
-  --font-sans: var(--font-zen-kaku), 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
-  --font-display: var(--font-shippori), 'Yu Mincho', serif;
+  /* 本文は端末の日本語フォントを使う。和文Webフォントは @font-face だけで数百KBの
+     レンダリングブロックCSSになり、読み込み後の差し替えでレイアウトもずれるため */
+  --font-sans:
+    'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic UI', Meiryo, 'Noto Sans JP',
+    sans-serif;
+  /* 見出しだけブランドの明朝（Shippori Mincho・400のみ）を読み込む */
+  --font-display: var(--font-shippori), 'Hiragino Mincho ProN', 'Yu Mincho', YuMincho, serif;
   --font-latin: var(--font-cormorant), Georgia, serif;
 
   --shadow-soft: 0 18px 50px -30px rgba(109, 27, 54, 0.45);

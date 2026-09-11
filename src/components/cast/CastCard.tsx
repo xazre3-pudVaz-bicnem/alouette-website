@@ -2,9 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { isPhotoPending, type Cast } from '@/data/casts';
 
-type Props = { cast: Cast; priority?: boolean };
+type Props = { cast: Cast; preload?: boolean };
 
-export default function CastCard({ cast, priority = false }: Props) {
+export default function CastCard({ cast, preload = false }: Props) {
   const photoPending = isPhotoPending(cast);
 
   const inner = (
@@ -19,7 +19,7 @@ export default function CastCard({ cast, priority = false }: Props) {
           }
           fill
           sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 90vw"
-          priority={priority}
+          preload={preload}
           style={{ objectPosition: cast.imagePosition ?? 'center' }}
           className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
         />
