@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { navigation, siteConfig, utilityNavigation } from '@/config/site';
 import { store } from '@/data/store';
 import SocialLinks from '@/components/ui/SocialLinks';
@@ -12,6 +12,7 @@ export default function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   const isHome = pathname === '/';
 
   useEffect(() => {
@@ -23,8 +24,17 @@ export default function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
     };
   }, [open]);
 
@@ -32,93 +42,103 @@ export default function Header() {
   const transparent = isHome && !scrolled && !open;
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
-        transparent
-          ? 'bg-transparent'
-          : 'bg-ivory/95 shadow-[0_1px_0_rgba(194,65,107,0.14)] backdrop-blur-md'
-      }`}
-      style={{ height: 'var(--header-h)' }}
-    >
-      <div className="container-page flex h-full items-center justify-between gap-4">
-        <Link
-          href="/"
-          className="flex shrink-0 items-center gap-2.5"
-          aria-label={`${siteConfig.name}（${siteConfig.nameJa}）トップページ`}
-        >
-          {/* 表示は高さ36〜40px。実寸（478px）で指定すると1080px幅の画像が全ページで先読みされ、
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
+          transparent
+            ? 'bg-transparent'
+            : 'bg-ivory/95 shadow-[0_1px_0_rgba(194,65,107,0.14)] backdrop-blur-md'
+        }`}
+        style={{ height: 'var(--header-h)' }}
+      >
+        <div className="container-page flex h-full items-center justify-between gap-4">
+          <Link
+            href="/"
+            className="flex shrink-0 items-center gap-2.5"
+            aria-label={`${siteConfig.name}（${siteConfig.nameJa}）トップページ`}
+          >
+            {/* 表示は高さ36〜40px。実寸（478px）で指定すると1080px幅の画像が全ページで先読みされ、
               ヒーロー画像の読み込みを遅らせていた */}
-          <Image
-            src={siteConfig.logo}
-            alt=""
-            width={53}
-            height={40}
-            loading="eager"
-            className="h-9 w-auto sm:h-10"
-          />
-          <span className="sr-only">
-            {siteConfig.name}（{siteConfig.nameJa}）
-          </span>
-        </Link>
+            <Image
+              src={siteConfig.logo}
+              alt=""
+              width={53}
+              height={40}
+              loading="eager"
+              className="h-9 w-auto sm:h-10"
+            />
+            <span className="sr-only">
+              {siteConfig.name}（{siteConfig.nameJa}）
+            </span>
+          </Link>
 
-        <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            href={`tel:${store.telHref}`}
-            className={`hidden items-center gap-2 text-sm tracking-wide transition sm:flex ${
-              transparent ? 'text-ivory hover:text-blush' : 'text-bordeaux hover:text-rose'
-            }`}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              className="h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.6"
-              aria-hidden="true"
+          <div className="flex items-center gap-2 sm:gap-3">
+            <a
+              href={`tel:${store.telHref}`}
+              className={`hidden items-center gap-2 py-2 text-sm tracking-wide transition sm:flex ${
+                transparent
+                  ? 'text-ivory hover:text-blush'
+                  : 'text-bordeaux hover:text-rose'
+              }`}
             >
-              <path d="M5 4h3l2 5-2.4 1.4a12 12 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2.2 2A16 16 0 0 1 3 6.2 2 2 0 0 1 5 4z" />
-            </svg>
-            <span className="font-latin text-[0.95rem]">{store.tel}</span>
-          </a>
+              <svg
+                viewBox="0 0 24 24"
+                className="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                aria-hidden="true"
+              >
+                <path d="M5 4h3l2 5-2.4 1.4a12 12 0 0 0 5 5L14 13l5 2v3a2 2 0 0 1-2.2 2A16 16 0 0 1 3 6.2 2 2 0 0 1 5 4z" />
+              </svg>
+              <span className="font-latin text-[0.95rem]">{store.tel}</span>
+            </a>
 
-          <a
-            href={`tel:${store.telHref}`}
-            className="rounded-full bg-bordeaux px-4 py-2 text-[0.8rem] font-medium tracking-[0.08em] text-ivory transition hover:bg-rose sm:px-5 sm:text-[0.85rem]"
-          >
-            電話予約
-          </a>
+            <a
+              href={`tel:${store.telHref}`}
+              className="rounded-full bg-bordeaux px-4 py-2 text-[0.8rem] font-medium tracking-[0.08em] text-ivory transition hover:bg-rose sm:px-5 sm:text-[0.85rem]"
+            >
+              電話予約
+            </a>
 
-          <button
-            type="button"
-            onClick={() => setOpen((v) => !v)}
-            aria-expanded={open}
-            aria-controls="global-menu"
-            aria-label={open ? 'メニューを閉じる' : 'メニューを開く'}
-            className={`flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full border transition ${
-              transparent
-                ? 'border-ivory/50 text-ivory'
-                : 'border-rose/30 text-bordeaux'
-            }`}
-          >
-            <span
-              className={`block h-px w-4 bg-current transition-transform duration-300 ${
-                open ? 'translate-y-[3px] rotate-45' : ''
+            <button
+              ref={toggleRef}
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="global-menu"
+              aria-label={open ? 'メニューを閉じる' : 'メニューを開く'}
+              className={`flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full border transition ${
+                transparent
+                  ? 'border-ivory/50 text-ivory'
+                  : 'border-rose/30 text-bordeaux'
               }`}
-            />
-            <span
-              className={`block h-px w-4 bg-current transition-transform duration-300 ${
-                open ? '-translate-y-[3px] -rotate-45' : ''
-              }`}
-            />
-          </button>
+            >
+              <span
+                className={`block h-px w-4 bg-current transition-transform duration-300 ${
+                  open ? 'translate-y-[3px] rotate-45' : ''
+                }`}
+              />
+              <span
+                className={`block h-px w-4 bg-current transition-transform duration-300 ${
+                  open ? '-translate-y-[3px] -rotate-45' : ''
+                }`}
+              />
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* ドロワーメニュー */}
+      {/*
+        ドロワーメニュー。
+        ⚠️ header の中に置かないこと。header には backdrop-blur（backdrop-filter）が付いており、
+        その子孫の position: fixed は画面ではなく header（高さ64px）を基準にしてしまうため、
+        メニューが高さ0に潰れて「≡を押しても何も出ない」状態になっていた。
+      */}
       <div
         id="global-menu"
         hidden={!open}
-        className="fixed inset-0 top-[var(--header-h)] overflow-y-auto bg-ivory"
+        className="fixed inset-x-0 top-[var(--header-h)] bottom-0 z-[45] overflow-y-auto bg-ivory"
       >
         {/* リンクを押したらドロワーを閉じる（クリックを親でまとめて受ける） */}
         <nav
@@ -167,7 +187,9 @@ export default function Header() {
               <span className="font-latin text-2xl tracking-wide">
                 {store.tel}
               </span>
-              <span className="text-xs text-ink-soft">{store.telHoursNote}</span>
+              <span className="text-xs text-ink-soft">
+                {store.telHoursNote}
+              </span>
             </a>
             <SocialLinks className="mt-5" size="sm" />
           </div>
@@ -175,7 +197,10 @@ export default function Header() {
           <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink-soft">
             {utilityNavigation.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="inline-block py-1.5 hover:text-rose">
+                <Link
+                  href={item.href}
+                  className="inline-block py-1.5 hover:text-rose"
+                >
                   {item.label}
                 </Link>
               </li>
@@ -183,6 +208,6 @@ export default function Header() {
           </ul>
         </nav>
       </div>
-    </header>
+    </>
   );
 }

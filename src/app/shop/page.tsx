@@ -56,8 +56,7 @@ export default function ShopPage() {
               </ActionLink>
             </div>
             <p className="mt-3 text-[0.75rem] text-ink-soft/75">
-              電話の受付時間は{store.telHours}（{store.closedDays}
-              定休）です。営業時間外は公式XのDMからご連絡ください。
+              電話の受付時間は{store.telHours}（{store.closedNote}）です。営業時間外は公式XのDMからご連絡ください。
             </p>
 
             <SocialLinks className="mt-8" />
@@ -130,8 +129,7 @@ export default function ShopPage() {
               駐車場・お支払い方法などについて
             </h2>
             <p className="mt-3 text-[0.87rem] leading-[1.95] text-ink-soft">
-              駐車場の有無、お支払い方法、喫煙可否、団体・貸切のご利用条件については、
-              お手数ですが店舗までお問い合わせください。
+              駐車場の有無、お支払い方法、喫煙可否、団体・貸切のご利用条件については、お手数ですが店舗までお問い合わせください。
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <ActionLink href={`tel:${store.telHref}`} variant="outline">

@@ -74,7 +74,7 @@ export default function ReserveActions({
           isLight ? 'text-ivory/65' : 'text-ink-soft/80'
         }`}
       >
-        お電話の受付時間は{store.telHours}（{store.closedDays}定休）です。
+        お電話の受付時間は{store.telHours}（{store.closedNote}）です。
         {socialLinks.x
           ? '営業時間外や、電話が苦手な方はXのDMからお気軽にどうぞ（24時間受付）。'
           : ''}

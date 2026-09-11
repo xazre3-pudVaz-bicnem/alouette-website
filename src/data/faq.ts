@@ -135,3 +135,12 @@ export const faqCategories = [
   'ご利用',
   'アクセス',
 ] as const;
+
+/** カテゴリ見出しのページ内リンク用ID（URLに日本語が入らないよう英数字にする） */
+export const faqCategoryIds: Record<(typeof faqCategories)[number], string> = {
+  初めての方: 'faq-first-visit',
+  料金: 'faq-price',
+  ご予約: 'faq-reservation',
+  ご利用: 'faq-usage',
+  アクセス: 'faq-access',
+};

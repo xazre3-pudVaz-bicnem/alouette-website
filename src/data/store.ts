@@ -33,6 +33,8 @@ export const store = {
   closeTime: '23:00',
   businessHours: '18:00〜23:00',
   closedDays: '日曜日',
+  /** 「〜定休」と続けるときの表記（「日曜日定休」ではなく「日曜定休」） */
+  closedNote: '日曜定休',
   businessHoursNote: '18:00〜23:00（日曜定休）',
 
   /** schema.org openingHoursSpecification 用（日曜のみ定休） */

@@ -115,7 +115,7 @@ export default function PrivacyPolicyPage() {
                   >
                     {store.tel}
                   </a>
-                  （受付時間 {store.telHours}／{store.closedDays}定休）
+                  （受付時間 {store.telHours}／{store.closedNote}）
                 </p>
               </address>
             </section>

@@ -14,7 +14,7 @@ export default function StoreInfoTable() {
       value: (
         <a
           href={`tel:${store.telHref}`}
-          className="font-latin text-[1.05rem] tracking-wide text-rose underline underline-offset-4"
+          className="inline-block py-1 font-latin text-[1.05rem] tracking-wide text-rose underline underline-offset-4"
         >
           {store.tel}
         </a>

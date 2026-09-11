@@ -41,9 +41,7 @@ export default function ContactPage() {
               ご連絡は、このどちらかで。
             </SectionHeading>
             <p className="mt-6 text-[0.94rem] leading-[2.1] text-ink-soft">
-              当店ではWEBの入力フォームはご用意していません。
-              お電話いただければその場でお席の空き状況をお答えできますし、
-              営業時間外や「まず雰囲気だけ聞きたい」という方はXのDMが便利です。
+              当店ではWEBの入力フォームはご用意していません。お電話いただければその場でお席の空き状況をお答えできますし、営業時間外や「まず雰囲気だけ聞きたい」という方はXのDMが便利です。
             </p>
 
             <ReserveActions className="mt-9" size="lg" />
@@ -106,8 +104,7 @@ export default function ContactPage() {
               <p className="mt-5 max-w-2xl text-[0.92rem] leading-[2] text-ink-soft">
                 キャストのご応募も、同じお電話番号
                 {socialLinks.x ? '・XのDM' : ''}
-                で受け付けています。履歴書は不要、面接のみのご参加もOKです。
-                お問い合わせの際に「求人の件で」とお伝えください。
+                で受け付けています。履歴書は不要、面接のみのご参加もOKです。お問い合わせの際に「求人の件で」とお伝えください。
               </p>
             </div>
             <ActionLink href="/recruit/" variant="outline">

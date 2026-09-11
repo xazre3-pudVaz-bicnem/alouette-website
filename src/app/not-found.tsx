@@ -35,8 +35,7 @@ export default function NotFound() {
           お探しのページが見つかりませんでした
         </h1>
         <p className="mx-auto mt-5 max-w-lg text-[0.9rem] leading-[2] text-ivory/80">
-          URLが変更されたか、削除された可能性があります。
-          下のメニューから、お目当てのページをお探しください。
+          URLが変更されたか、削除された可能性があります。下のメニューから、お目当てのページをお探しください。
         </p>
 
         <nav aria-label="主なページ" className="mx-auto mt-10 max-w-2xl">
@@ -62,7 +61,7 @@ export default function NotFound() {
           >
             {store.tel}
           </a>
-          （受付 {store.telHours}・{store.closedDays}定休）
+          （受付 {store.telHours}・{store.closedNote}）
         </p>
       </div>
     </section>

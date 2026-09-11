@@ -6,7 +6,7 @@ import ContactCta from '@/components/common/ContactCta';
 import Reveal from '@/components/ui/Reveal';
 import ActionLink from '@/components/ui/ActionLink';
 import JsonLd from '@/components/ui/JsonLd';
-import { faqs, faqCategories } from '@/data/faq';
+import { faqs, faqCategories, faqCategoryIds } from '@/data/faq';
 import { store } from '@/data/store';
 import { faqJsonLd } from '@/lib/jsonld';
 import { buildMetadata } from '@/lib/seo';
@@ -37,7 +37,7 @@ export default function FaqPage() {
             {faqCategories.map((c) => (
               <li key={c}>
                 <a
-                  href={`#faq-${encodeURIComponent(c)}`}
+                  href={`#${faqCategoryIds[c]}`}
                   className="inline-block rounded-full border border-rose/30 px-5 py-2 text-[0.8rem] text-rose transition hover:bg-shell"
                 >
                   {c}
@@ -57,7 +57,7 @@ export default function FaqPage() {
             return (
               <div
                 key={category}
-                id={`faq-${encodeURIComponent(category)}`}
+                id={faqCategoryIds[category]}
                 className="mt-12 first:mt-0"
               >
                 <h2 className="font-display text-[1.3rem] text-bordeaux">
@@ -104,8 +104,7 @@ export default function FaqPage() {
               解決しない場合は、お気軽にご連絡ください
             </h2>
             <p className="mt-3 text-[0.87rem] leading-[1.95] text-ink-soft">
-              お電話の受付時間は{store.telHours}（{store.closedDays}
-              定休）。営業時間外は公式XのDMからもご連絡いただけます。
+              お電話の受付時間は{store.telHours}（{store.closedNote}）。営業時間外は公式XのDMからもご連絡いただけます。
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <ActionLink href={`tel:${store.telHref}`} variant="outline">

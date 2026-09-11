@@ -210,8 +210,7 @@ export default async function CastDetailPage({ params }: Params) {
                 {cast.name}に会いにいく
               </h2>
               <p className="mt-4 text-[0.88rem] leading-[1.95] text-ink-soft">
-                出勤日はお店にお問い合わせいただくのがいちばん確実です。
-                ご予約の際に「{cast.name}に会いたい」とお伝えください。
+                出勤日はお店にお問い合わせいただくのがいちばん確実です。ご予約の際に「{cast.name}に会いたい」とお伝えください。
               </p>
               <ReserveActions className="mt-7 text-left sm:text-center" />
             </Reveal>

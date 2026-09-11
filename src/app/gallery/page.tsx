@@ -38,8 +38,7 @@ export default function GalleryPage() {
           {illustrationCount > 0 ? (
             <Reveal className="mt-12 rounded-lg border border-dashed border-rose/30 bg-shell px-6 py-6 text-center">
               <p className="text-[0.85rem] leading-[1.95] text-ink-soft">
-                「イメージ」と表示されているものは、お店の世界観を表したイラストです（実際の店内写真ではありません）。
-                最新の店内やイベントの様子は公式SNSでもご覧いただけます。
+                「イメージ」と表示されているものは、お店の世界観を表したイラストです（実際の店内写真ではありません）。最新の店内やイベントの様子は公式SNSでもご覧いただけます。
               </p>
             </Reveal>
           ) : null}

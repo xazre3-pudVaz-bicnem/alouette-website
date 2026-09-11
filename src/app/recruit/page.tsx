@@ -61,8 +61,7 @@ export default function RecruitPage() {
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-[0.94rem] leading-[2] text-ivory/85">
-            小田急相模原駅から徒歩4分。未経験の方も大歓迎です。
-            まずはお店の雰囲気を見にくるだけでも構いません。
+            小田急相模原駅から徒歩4分。未経験の方も大歓迎です。まずはお店の雰囲気を見にくるだけでも構いません。
           </p>
 
           <ul className="mt-9 flex flex-wrap gap-2.5">
@@ -92,7 +91,7 @@ export default function RecruitPage() {
             </ActionLink>
           </div>
           <p className="mt-3 text-[0.75rem] text-ivory/60">
-            電話の受付時間 {store.telHours}（{store.closedDays}定休）
+            電話の受付時間 {store.telHours}（{store.closedNote}）
           </p>
         </div>
       </section>
@@ -288,8 +287,7 @@ export default function RecruitPage() {
             </SectionHeading>
             <p className="mt-6 text-[0.94rem] leading-[2.1] text-ink-soft">
               {recruit.trial.body}
-              まずはお店の雰囲気を見てから決めていただけますので、
-              「働けるか不安」という方も安心してご連絡ください。
+              まずはお店の雰囲気を見てから決めていただけますので、「働けるか不安」という方も安心してご連絡ください。
             </p>
             <p className="mt-4 text-[0.8rem] leading-[1.9] text-ink-soft/80">
               ※体験入店の時給や当日の持ち物については、ご連絡の際にご案内します。
@@ -347,7 +345,7 @@ export default function RecruitPage() {
                 {store.tel}
               </a>
               <p className="mt-2 text-[0.78rem] text-ink-soft">
-                受付時間 {store.telHours}（{store.closedDays}定休）
+                受付時間 {store.telHours}（{store.closedNote}）
               </p>
             </Reveal>
 
@@ -482,7 +480,7 @@ export default function RecruitPage() {
           </div>
           <p className="mt-4 text-[0.75rem] text-ivory/60">
             18歳以上（高校生不可）／電話受付 {store.telHours}・
-            {store.closedDays}定休
+            {store.closedNote}
           </p>
         </div>
       </section>

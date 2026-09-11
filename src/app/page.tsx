@@ -108,8 +108,7 @@ export default async function HomePage() {
           <Reveal className="max-w-2xl">
             <SectionHeading eyebrow="Cast">alouetteの女の子たち</SectionHeading>
             <p className="mt-6 text-[0.94rem] leading-[2.1] text-ink-soft">
-              明るく話しやすい女の子たちが待っています。プロフィールは
-              キャストページからご覧いただけます。
+              明るく話しやすい女の子たちが待っています。プロフィールはキャストページからご覧いただけます。
             </p>
           </Reveal>
 
@@ -143,9 +142,7 @@ export default async function HomePage() {
               コンカフェ、はじめてでも大丈夫。
             </SectionHeading>
             <p className="mt-7 text-[0.94rem] leading-[2.1] text-ivory/85">
-              難しいルールはありません。60分のセット料金でスタートして、
-              好きなドリンクを飲みながらお話しするだけ。
-              おひとりでのご来店も、女性のお客様も歓迎しています。
+              難しいルールはありません。60分のセット料金でスタートして、好きなドリンクを飲みながらお話しするだけ。おひとりでのご来店も、女性のお客様も歓迎しています。
             </p>
             <ActionLink href="/first-guide/" variant="light" className="mt-9">
               初めての方へ
@@ -296,7 +293,7 @@ export default async function HomePage() {
             </SectionHeading>
             <Link
               href="/news/"
-              className="text-[0.82rem] text-rose underline underline-offset-[6px] hover:text-bordeaux"
+              className="inline-block py-1.5 text-[0.82rem] text-rose underline underline-offset-[6px] hover:text-bordeaux"
             >
               すべて見る
             </Link>
@@ -345,7 +342,7 @@ export default async function HomePage() {
             </SectionHeading>
             <Link
               href="/gallery/"
-              className="text-[0.82rem] text-blush underline underline-offset-[6px] hover:text-ivory"
+              className="inline-block py-1.5 text-[0.82rem] text-blush underline underline-offset-[6px] hover:text-ivory"
             >
               ギャラリーを見る
             </Link>
@@ -380,8 +377,7 @@ export default async function HomePage() {
               小田急相模原駅から、徒歩4分。
             </SectionHeading>
             <p className="mt-7 text-[0.94rem] leading-[2.1] text-ink-soft">
-              神奈川県相模原市南区南台。小田急相模原駅の北口を出て直進し、駅前の信号を右折。
-              南大野交番前を左折して進むと、1つ目の角にピンクのネオンが見えてきます。
+              神奈川県相模原市南区南台。小田急相模原駅の北口を出て直進し、駅前の信号を右折。南大野交番前を左折して進むと、1つ目の角にピンクのネオンが見えてきます。
             </p>
 
             <dl className="mt-9 space-y-3 text-[0.9rem]">
@@ -394,7 +390,7 @@ export default async function HomePage() {
                 <dd>
                   <a
                     href={`tel:${store.telHref}`}
-                    className="font-latin text-[1.05rem] text-bordeaux underline underline-offset-4"
+                    className="inline-block py-1 font-latin text-[1.05rem] text-bordeaux underline underline-offset-4"
                   >
                     {store.tel}
                   </a>
@@ -451,8 +447,7 @@ export default async function HomePage() {
             <p className="mt-6 text-[0.94rem] leading-[2.1] text-ink-soft">
               時給{recruit.wage.hourlyFrom.toLocaleString('ja-JP')}円〜、
               {recruit.wage.backText}
-              。自由シフト制で週1日〜OK、未経験の方も歓迎です。
-              履歴書は不要、面接のみのご参加もできます。
+              。自由シフト制で週1日〜OK、未経験の方も歓迎です。履歴書は不要、面接のみのご参加もできます。
             </p>
             <ul className="mt-7 flex flex-wrap gap-2">
               {[
@@ -526,9 +521,7 @@ export default async function HomePage() {
         <div className="container-page">
           <p className="mx-auto max-w-3xl text-center text-[0.8rem] leading-[2] text-ink-soft/80">
             {siteConfig.name}（{siteConfig.nameJa}
-            ）は、神奈川県相模原市南区南台にあるコンセプトカフェ＆バーです。
-            小田急線 小田急相模原駅の北口から徒歩4分。相模原市内はもちろん、
-            座間市・大和市方面からもお立ち寄りいただけます。
+            ）は、神奈川県相模原市南区南台にあるコンセプトカフェ＆バーです。小田急線 小田急相模原駅の北口から徒歩4分。相模原市内はもちろん、座間市・大和市方面からもお立ち寄りいただけます。
           </p>
         </div>
       </section>

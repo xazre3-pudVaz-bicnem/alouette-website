@@ -41,8 +41,7 @@ export default function CastIndexPage() {
                 キャスト情報は準備中です
               </p>
               <p className="mx-auto mt-3 max-w-lg text-[0.88rem] leading-[1.95] text-ink-soft">
-                現在プロフィールの準備を進めています。公開までの間、
-                在籍キャストの様子は公式SNSでご覧いただけます。
+                現在プロフィールの準備を進めています。公開までの間、在籍キャストの様子は公式SNSでご覧いただけます。
               </p>
               <SocialLinks className="mt-6 justify-center" size="sm" />
             </Reveal>
@@ -59,8 +58,7 @@ export default function CastIndexPage() {
           <Reveal className="mt-16 hairline pt-10">
             <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
               <p className="text-[0.9rem] leading-[1.95] text-ink-soft">
-                会いたい子の出勤日は、お店にお問い合わせいただくのがいちばん確実です。
-                ご予約の際に女の子のお名前をお伝えください。
+                会いたい子の出勤日は、お店にお問い合わせいただくのがいちばん確実です。ご予約の際に女の子のお名前をお伝えください。
               </p>
               <ActionLink href={`tel:${store.telHref}`} variant="outline">
                 電話で聞いてみる

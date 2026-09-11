@@ -84,12 +84,26 @@ const toDateString = (value: string | Date | undefined): string => {
   return String(value).slice(0, 10);
 };
 
+/**
+ * 段落の途中の改行が日本語どうしの間にある場合は取り除く。
+ * Markdown では段落内の改行がそのまま残り、ブラウザで半角スペースとして表示されるため
+ * （「承ります。 お祝いセット」のような不自然な空白になる）。
+ * 太字・リンクなどのインライン要素をはさむ場合も対象。段落や見出しの区切りには触れない。
+ */
+const CJK = '[\u3000-\u30ff\u3400-\u9fff\uff01-\uffef]';
+const CJK_LINE_BREAK = new RegExp(
+  `(${CJK}(?:</(?:strong|em|a|code)>)?)\n((?:<(?:strong|em|a)[^>]*>)?${CJK})`,
+  'g',
+);
+const joinJapaneseLines = (html: string): string =>
+  html.replace(CJK_LINE_BREAK, '$1$2');
+
 const markdownToHtml = async (markdown: string): Promise<string> => {
   const file = await remark()
     .use(remarkGfm)
     .use(remarkHtml, { sanitize: false })
     .process(markdown);
-  return String(file);
+  return joinJapaneseLines(String(file));
 };
 
 const isCategory = (value: string | undefined): value is NewsCategory =>

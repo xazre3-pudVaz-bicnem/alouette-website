@@ -44,14 +44,10 @@ export default function FirstGuidePage() {
             </SectionHeading>
             <div className="mt-7 space-y-5 text-[0.94rem] leading-[2.1] text-ink-soft">
               <p>
-                alouette（あるえっと）は、神奈川県相模原市南区南台にあるコンセプトカフェ＆バーです。
-                かわいい女の子たちと、カウンターやテーブル席で気軽におしゃべりしながら過ごせます。
+                alouette（あるえっと）は、神奈川県相模原市南区南台にあるコンセプトカフェ＆バーです。かわいい女の子たちと、カウンターやテーブル席で気軽におしゃべりしながら過ごせます。
               </p>
               <p>
-                難しいルールはありません。60分のセット料金でスタートして、
-                お好きなドリンクを飲みながらお話しするだけ。
-                お仕事帰りにふらっと立ち寄る方、ご友人との二次会に使う方など、
-                楽しみ方はさまざまです。
+                難しいルールはありません。60分のセット料金でスタートして、お好きなドリンクを飲みながらお話しするだけ。お仕事帰りにふらっと立ち寄る方、ご友人との二次会に使う方など、楽しみ方はさまざまです。
               </p>
               <p>
                 営業時間は{store.businessHours}、定休日は{store.closedDays}
@@ -142,8 +138,7 @@ export default function FirstGuidePage() {
                 </h3>
                 <p className="mt-3 text-[0.88rem] leading-[1.95] text-ink-soft">
                   女の子に1杯ごちそうしていただけるドリンクです（
-                  {options[0].price?.toLocaleString('ja-JP')}円）。
-                  必須ではありませんので、「一緒に乾杯したいな」と思ったときにご注文ください。
+                  {options[0].price?.toLocaleString('ja-JP')}円）。必須ではありませんので、「一緒に乾杯したいな」と思ったときにご注文ください。
                 </p>
               </div>
 
@@ -153,8 +148,7 @@ export default function FirstGuidePage() {
                 </h3>
                 <p className="mt-3 text-[0.88rem] leading-[1.95] text-ink-soft">
                   その場でプリントされるインスタント写真です（1枚
-                  {options[1].price?.toLocaleString('ja-JP')}円）。
-                  女の子と一緒に写って、楽しかった夜をそのまま持ち帰れます。
+                  {options[1].price?.toLocaleString('ja-JP')}円）。女の子と一緒に写って、楽しかった夜をそのまま持ち帰れます。
                 </p>
               </div>
 
@@ -163,8 +157,7 @@ export default function FirstGuidePage() {
                   自動延長制について
                 </h3>
                 <p className="mt-3 text-[0.88rem] leading-[1.95] text-ink-soft">
-                  60分が過ぎると自動的に延長になります。お帰りの際はスタッフへお声がけください。
-                  延長料金の詳細は、店内またはスタッフへご確認いただけます。
+                  60分が過ぎると自動的に延長になります。お帰りの際はスタッフへお声がけください。延長料金の詳細は、店内またはスタッフへご確認いただけます。
                 </p>
               </div>
             </Reveal>
@@ -235,7 +228,7 @@ export default function FirstGuidePage() {
                 店舗（{store.tel}）
               </a>
               までお問い合わせください。受付時間は{store.telHours}（
-              {store.closedDays}定休）です。
+              {store.closedNote}）です。
             </p>
           </Reveal>
         </div>
@@ -310,7 +303,7 @@ export default function FirstGuidePage() {
           <Reveal className="mt-9">
             <Link
               href="/faq/"
-              className="text-[0.85rem] text-rose underline underline-offset-[6px]"
+              className="inline-block py-1.5 text-[0.85rem] text-rose underline underline-offset-[6px]"
             >
               よくある質問をすべて見る
             </Link>

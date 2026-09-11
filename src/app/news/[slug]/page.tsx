@@ -198,7 +198,7 @@ export default async function NewsDetailPage({ params }: Params) {
                 <li key={link.url}>
                   <Link
                     href={link.url}
-                    className="text-[0.9rem] text-bordeaux underline underline-offset-[6px] hover:text-rose"
+                    className="inline-block py-1 text-[0.9rem] text-bordeaux underline underline-offset-[6px] hover:text-rose"
                   >
                     {link.label}
                   </Link>
@@ -211,7 +211,7 @@ export default async function NewsDetailPage({ params }: Params) {
         <div className="container-page mt-14 max-w-3xl">
           <Link
             href="/news/"
-            className="text-[0.85rem] text-rose underline underline-offset-[6px]"
+            className="inline-block py-1.5 text-[0.85rem] text-rose underline underline-offset-[6px]"
           >
             ← イベント・新着情報の一覧へ
           </Link>
