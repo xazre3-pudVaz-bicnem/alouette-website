@@ -165,7 +165,7 @@ export const champagneSets: { name: string; price: number; items: string[] }[] =
     },
     {
       name: 'Bセット',
-      price: 9800,
+      price: 12000,
       items: [
         '1タイム（60分）飲み放題',
         'ノンアルコールシャンパン',
@@ -177,7 +177,7 @@ export const champagneSets: { name: string; price: number; items: string[] }[] =
   ];
 
 export const champagneSetPoster = {
-  src: '/images/menu/poster-champagne-set.jpg',
+  src: '/images/menu/poster-champagne-set-v2.jpg',
   width: 1054,
   height: 1492,
 };
