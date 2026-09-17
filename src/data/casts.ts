@@ -128,8 +128,10 @@ export const casts: Cast[] = [
     slug: 'eru',
     name: 'える',
     nickname: 'えるちゃん',
-    catchphrase: '',
-    mainImage: '/images/cast/eru-main.jpg',
+    catchphrase: '癒し系の優しいメイド',
+    mainImage: '/images/cast/eru-main-202609.jpg',
+    // 縦長の写真のため、顔が切れないよう上寄せで表示
+    imagePosition: '50% 20%',
     gallery: [],
     birthday: '5月7日',
     favorites: ['甘いもの', 'フルーツ'],

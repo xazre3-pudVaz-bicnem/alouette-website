@@ -84,6 +84,71 @@ export const galleryImages: GalleryImage[] = [
     height: 1280,
   },
 
+  // ── 2026年9月に店舗から届いた写真 ──
+  {
+    src: '/images/gallery/counter-seats-202609.jpg',
+    alt: 'alouette のカウンター席。壁一面にイラストやポスターが飾られた店内',
+    category: 'カウンター',
+    width: 1280,
+    height: 1280,
+  },
+  {
+    src: '/images/gallery/counter-shelf-202609.jpg',
+    alt: 'フィギュアやイラストが並ぶカウンター内の棚とグラス',
+    category: 'カウンター',
+    width: 1280,
+    height: 1280,
+  },
+  {
+    src: '/images/gallery/cast-omurice-202609.jpg',
+    alt: 'オムライスを持って手を振るメイド衣装のキャストたち',
+    category: 'キャスト',
+    width: 1280,
+    height: 1280,
+  },
+  {
+    src: '/images/gallery/cast-counter-202609.jpg',
+    alt: 'フィギュア棚の前で顔を隠してポーズをとるメイド衣装のキャスト',
+    category: 'キャスト',
+    width: 1190,
+    height: 1376,
+  },
+  {
+    src: '/images/gallery/cast-selfie-01-202609.jpg',
+    alt: '白と黒のメイド衣装でピースをするキャスト',
+    category: 'キャスト',
+    width: 902,
+    height: 1400,
+  },
+  {
+    src: '/images/gallery/cast-selfie-02-202609.jpg',
+    alt: '水色のメイド衣装のキャスト',
+    category: 'キャスト',
+    width: 1050,
+    height: 1400,
+  },
+  {
+    src: '/images/gallery/omurice-cat-202609.jpg',
+    alt: 'ケチャップで猫の顔と「Thank you」を描いたオムライス',
+    category: 'フード',
+    width: 1050,
+    height: 1400,
+  },
+  {
+    src: '/images/gallery/omurice-love-202609.jpg',
+    alt: 'ケチャップで「LOVE」と描いたオムライス',
+    category: 'フード',
+    width: 1280,
+    height: 1280,
+  },
+  {
+    src: '/images/gallery/cheki-202609.jpg',
+    alt: 'キャストと撮影したチェキ3枚',
+    category: 'キャスト',
+    width: 1280,
+    height: 1280,
+  },
+
   // ── キャスト写真（店舗から提供されたもの） ──
   {
     src: '/images/cast/yui-main-202609.jpg',
@@ -107,11 +172,11 @@ export const galleryImages: GalleryImage[] = [
     height: 1334,
   },
   {
-    src: '/images/cast/eru-main.jpg',
-    alt: 'alouette のキャスト える',
+    src: '/images/cast/eru-main-202609.jpg',
+    alt: 'alouette のキャスト える。黒と赤のセーラー風メイド衣装',
     category: 'キャスト',
-    width: 940,
-    height: 958,
+    width: 710,
+    height: 1400,
   },
   {
     src: '/images/cast/yunya-main.jpg',
