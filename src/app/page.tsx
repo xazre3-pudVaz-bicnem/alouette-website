@@ -17,7 +17,7 @@ import { siteConfig, activeSocialLinks } from '@/config/site';
 import { charms, conceptLead, features } from '@/data/concept';
 import { store } from '@/data/store';
 import { publishedCasts } from '@/data/casts';
-import { drinks, options } from '@/data/menu';
+import { drinkHighlights, options } from '@/data/menu';
 import { realPhotos } from '@/data/gallery';
 import { recruit } from '@/data/recruit';
 import { accessSteps } from '@/data/access';
@@ -207,7 +207,7 @@ export default async function HomePage() {
               <div className="hairline pt-8">
                 <h3 className="eyebrow text-rose">Drink</h3>
                 <p className="mt-4 text-[0.9rem] leading-[2] text-ink-soft">
-                  {drinks.map((d) => d.name).join('／')}
+                  {drinkHighlights.join('／')}
                 </p>
                 <p className="mt-2 text-[0.78rem] text-ink-soft/80">
                   ※生ビールはプラス200円です。

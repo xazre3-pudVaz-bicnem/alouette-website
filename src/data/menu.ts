@@ -2,9 +2,10 @@
  * 料金・メニュー。
  *
  * ⚠️ 重要
- * ここに載っている金額は現行サイト（alouette0405.com）と完全に一致させています。
- * 金額の追加・変更は必ず店舗の指示に従ってください。
- * 現行サイトに金額の記載がないメニュー（フード類）には price を設定していません。
+ * ここに載っている金額は、現行サイト（alouette0405.com）と
+ * 店舗から届いたメニューポスター（public/images/menu/、2026年9月）の表記だけです。
+ * 金額の追加・変更は必ず店舗の指示に従ってください。こちらで金額を作らないこと。
+ * 金額の記載がないメニュー（おつまみ類）には price を設定していません。
  */
 
 export type PriceItem = {
@@ -27,21 +28,91 @@ export const systemNotes: string[] = [
   'お会計はテーブル会計となります。',
 ];
 
-/** 飲み放題ドリンク */
+/** 飲み放題ドリンク（アルコール）。「飲み放題メニュー」ポスターの表記どおり */
 export const drinks: PriceItem[] = [
   { name: '生ビール', note: 'プラス200円' },
   { name: 'ハイボール' },
-  { name: 'レモンサワー', note: '各種サワー有り' },
+  { name: 'レモンサワー' },
+  { name: '巨峰サワー' },
+  { name: 'グレープフルーツサワー' },
+  { name: '男梅サワー' },
   { name: '緑茶ハイ' },
   { name: 'ウーロンハイ' },
   { name: 'ジントニック' },
-  { name: '角ウイスキー' },
+  { name: 'カシスオレンジ' },
+  { name: 'コークハイ' },
+  { name: '焼酎', note: '水割り・ロック' },
+  { name: 'ウィスキー角', note: '水割り・ロック' },
   { name: '梅酒' },
-  { name: 'ソフトドリンク各種' },
+];
+
+/** 飲み放題ドリンク（ソフトドリンク） */
+export const softDrinks: PriceItem[] = [
+  { name: 'オレンジジュース' },
+  { name: 'コーラ' },
+  { name: 'アイスコーヒー' },
+  { name: '緑茶' },
+  { name: 'ウーロン茶' },
+];
+
+/** 飲み放題の補足（ポスターの表記） */
+export const drinkNotes: string[] = [
+  'ほかにもいろいろご用意しています。',
+  'おかわりはグラス交換でお願いいたします。',
+];
+
+/** トップページ・初めての方ページで使う、飲み放題の短い紹介 */
+export const drinkHighlights: string[] = [
+  '生ビール',
+  'ハイボール',
+  '各種サワー',
+  '緑茶ハイ',
+  'ウーロンハイ',
+  'ジントニック',
+  'カシスオレンジ',
+  '焼酎',
+  'ウィスキー',
+  '梅酒',
+  'ソフトドリンク',
+];
+
+export type PosterItem = PriceItem & {
+  /** 店舗から届いたメニューポスター */
+  poster: { src: string; width: number; height: number };
+};
+
+/** おすすめフード（ポスターに記載の金額） */
+export const featuredFoods: PosterItem[] = [
+  {
+    name: '愛のお絵かきオムライス',
+    price: 1200,
+    note: 'あなただけに心をこめて描きます',
+    poster: {
+      src: '/images/menu/poster-omurice.jpg',
+      width: 1054,
+      height: 1492,
+    },
+  },
+  {
+    name: 'ときめきピザ',
+    price: 1200,
+    note: 'チーズがトロ〜リ',
+    poster: { src: '/images/menu/poster-pizza.jpg', width: 1086, height: 1448 },
+  },
+  {
+    name: 'メイドがチンするたこ焼き',
+    price: 880,
+    note: 'あつあつをお届けします',
+    poster: {
+      src: '/images/menu/poster-takoyaki.jpg',
+      width: 1024,
+      height: 1536,
+    },
+  },
 ];
 
 /**
- * フードメニュー。
+ * おつまみ。
  * 現行サイトに金額の記載がないため、価格は設定していません（勝手に作らないこと）。
  */
 export const foods: PriceItem[] = [
@@ -52,6 +123,70 @@ export const foods: PriceItem[] = [
   { name: 'お菓子盛り合わせ' },
   { name: 'チョコレート盛り合わせ' },
 ];
+
+/** おすすめドリンク「心にドキュンテキーラ」（1杯） */
+export const tequila = {
+  name: '心にドキュンテキーラ',
+  prices: [
+    { name: 'お客様', price: 1000 },
+    { name: 'キャスト', price: 1200 },
+  ] as PriceItem[],
+  poster: { src: '/images/menu/poster-tequila.jpg', width: 1054, height: 1492 },
+};
+
+/** シャンパン（ボトル） */
+export const champagnes: PriceItem[] = [
+  { name: 'カフェ・ド・パリ', price: 8800 },
+  { name: '天使のアスティ', price: 10000 },
+  { name: 'アヤラ', price: 18000 },
+  { name: 'モエシャンドン', price: 20000 },
+  { name: 'ノンアルシャンパン', price: 3500 },
+];
+
+export const champagneMenuPoster = {
+  src: '/images/menu/poster-champagne.jpg',
+  width: 1024,
+  height: 1536,
+};
+
+/** ときめきシャンパンセット */
+export const champagneSets: { name: string; price: number; items: string[] }[] =
+  [
+    {
+      name: 'Aセット',
+      price: 18000,
+      items: [
+        '2タイム（120分）飲み放題',
+        'カフェ・ド・パリ',
+        'シャンパン開封動画',
+        'チェキ撮影',
+        'お菓子盛り合わせ',
+      ],
+    },
+    {
+      name: 'Bセット',
+      price: 9800,
+      items: [
+        '1タイム（60分）飲み放題',
+        'ノンアルコールシャンパン',
+        'シャンパン開封動画',
+        'チェキ',
+        'お菓子盛り合わせ',
+      ],
+    },
+  ];
+
+export const champagneSetPoster = {
+  src: '/images/menu/poster-champagne-set.jpg',
+  width: 1054,
+  height: 1492,
+};
+
+export const drinkMenuPoster = {
+  src: '/images/menu/poster-drinks.jpg',
+  width: 1024,
+  height: 1536,
+};
 
 /** オプション */
 export const options: PriceItem[] = [
@@ -91,7 +226,7 @@ export const orderFlow: { title: string; body: string }[] = [
   },
 ];
 
-/** 追加料金が発生するメニュー（初めての方向けのまとめ） */
+/** よく注文される追加料金（初めての方向けのまとめ。フード・シャンパン等は各メニューを参照） */
 export const extraCharges: PriceItem[] = [
   { name: '生ビール', price: 200, note: 'ドリンク1杯につきプラス200円' },
   { name: 'キャストドリンク', price: 1000, note: 'ご希望の場合のみ' },

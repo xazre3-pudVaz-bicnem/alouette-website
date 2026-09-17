@@ -9,7 +9,7 @@ import PriceBoard from '@/components/common/PriceBoard';
 import Reveal from '@/components/ui/Reveal';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ActionLink from '@/components/ui/ActionLink';
-import { drinks, options, orderFlow, usageNotes } from '@/data/menu';
+import { drinkHighlights, options, orderFlow, usageNotes } from '@/data/menu';
 import { featuredFaqs } from '@/data/faq';
 import { store } from '@/data/store';
 import { accessSteps } from '@/data/access';
@@ -125,7 +125,7 @@ export default function FirstGuidePage() {
                   飲み放題の内容
                 </h3>
                 <p className="mt-3 text-[0.88rem] leading-[2] text-ink-soft">
-                  {drinks.map((d) => d.name).join('／')}
+                  {drinkHighlights.join('／')}
                 </p>
                 <p className="mt-2 text-[0.78rem] text-ink-soft/80">
                   ※生ビールのみプラス200円です。お酒が苦手な方はソフトドリンクをどうぞ。

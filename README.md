@@ -464,7 +464,8 @@ export const socialLinks = {
 | 団体・貸切の条件 | `src/data/store.ts` → `unverified.groupPolicy` / `privateHirePolicy` | |
 | 駐車場の有無 | `src/data/store.ts` → `unverified.parking` | |
 | 延長料金 | `src/data/menu.ts` | 「自動延長制」とだけ記載しています |
-| フードの金額 | `src/data/menu.ts` | 現行サイトに記載がないため未掲載 |
+| おつまみの金額 | `src/data/menu.ts` → `foods` | オムライス・ピザ・たこ焼きはポスターの金額を掲載。おつまみ類は記載がないため未掲載 |
+| ポスターの料金が税込か | `src/data/menu.ts` | 現行サイトの「料金はすべて税込」に合わせて税込として案内しています。税別なら表記を直してください |
 | 求人：交通費・送迎・衣装代・ノルマ・罰金・勤務時間帯 | `src/data/recruit.ts` → `unverified` | |
 | 求人：体験入店の時給・持ち物 | `src/data/recruit.ts` → `unverified.trialWage` | |
 | 「かわいい衣装支給」の可否 | `src/data/recruit.ts` → `costumeNote` | 旧サイトのトップページに記載があったため掲載中。誤りなら削除してください |
@@ -476,7 +477,6 @@ export const socialLinks = {
 | キャスト個人SNSのアカウント名 | `src/data/casts.ts` | LINEの文面から転記しました。誤りがないかご確認ください |
 | キャスト写真・プロフィールの掲載同意 | — | 6名分を公開しています。同意が取れていない方がいれば `isPublished: false` にしてください |
 | 駅からの道順の写真3点（STEP1〜3） | `public/images/access/` | GOAL（外観）は掲載済み。STEP1〜3はプレースホルダー |
-| **たこ焼き 880円 / ピザ 1,200円の掲載可否** | `src/data/menu.ts` | 店舗提供のポスター（`public/images/menu/poster-takoyaki.jpg` / `poster-pizza.jpg`）に価格が入っていますが、現行メニューか期間限定か不明なため未掲載です |
 | 外観写真の「営業中です 13時〜17時」の札 | — | サイト掲載の営業時間（18:00〜23:00）と異なります。昼営業もある場合はお知らせください |
 
 ### 表記を統一した箇所
