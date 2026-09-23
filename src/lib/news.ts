@@ -40,6 +40,8 @@ export type NewsPost = {
   isPoster: boolean;
   /** イベントの開催日（YYYY-MM-DD）。カテゴリ「イベント」の記事で指定する */
   eventDate?: string;
+  /** 複数日開催のときの最終日（YYYY-MM-DD）。1日だけなら未設定 */
+  eventEndDate?: string;
   /** イベント名（構造化データ用。未設定なら title） */
   eventName?: string;
   /** イベントの料金（円）。本文にも同じ金額を書くこと */
@@ -72,6 +74,7 @@ type RawFrontmatter = {
   metaDescription?: string;
   links?: NewsLink[];
   eventDate?: string | Date;
+  eventEndDate?: string | Date;
   eventName?: string;
   eventPrice?: number;
   published?: boolean;
@@ -138,8 +141,12 @@ export const getAllNews = async (): Promise<NewsPost[]> => {
         thumbnailSize,
         isPoster: !!thumbnailSize && thumbnailSize.height > thumbnailSize.width,
         eventDate: fm.eventDate ? toDateString(fm.eventDate) : undefined,
+        eventEndDate: fm.eventEndDate
+          ? toDateString(fm.eventEndDate)
+          : undefined,
         eventName: fm.eventName,
-        eventPrice: typeof fm.eventPrice === 'number' ? fm.eventPrice : undefined,
+        eventPrice:
+          typeof fm.eventPrice === 'number' ? fm.eventPrice : undefined,
         excerpt: fm.excerpt ?? '',
         seoTitle: fm.seoTitle,
         metaDescription: fm.metaDescription,
@@ -168,6 +175,6 @@ export const getNewsSlugs = async (): Promise<string[]> => {
   return all.map((p) => p.slug);
 };
 
-/** 開催日が過ぎたイベントか（日本時間で判定） */
+/** 開催日（複数日なら最終日）が過ぎたイベントか（日本時間で判定） */
 export const isEventEnded = (post: NewsPost): boolean =>
-  !!post.eventDate && post.eventDate < todayJst();
+  !!post.eventDate && (post.eventEndDate ?? post.eventDate) < todayJst();

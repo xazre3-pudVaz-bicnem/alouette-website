@@ -157,6 +157,8 @@ export const eventJsonLd = (args: {
   description: string;
   /** 開催日（YYYY-MM-DD） */
   startDate: string;
+  /** 最終日（複数日開催のときだけ） */
+  endDate?: string;
   url: string;
   image: string;
   /** 料金（円）。本文に表示している金額と同じもの */
@@ -167,6 +169,7 @@ export const eventJsonLd = (args: {
   name: args.name,
   description: args.description,
   startDate: args.startDate,
+  ...(args.endDate ? { endDate: args.endDate } : {}),
   eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
   eventStatus: 'https://schema.org/EventScheduled',
   url: args.url,

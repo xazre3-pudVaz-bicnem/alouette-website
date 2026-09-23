@@ -63,6 +63,21 @@ export default function MenuPage() {
             <div className="mt-8">
               <PriceBoard />
             </div>
+            <div className="mt-6 rounded-lg border border-rose/25 bg-shell px-6 py-5">
+              <p className="font-display text-[1.02rem] text-bordeaux">
+                ハッピーアワー実施中
+              </p>
+              <p className="mt-2 text-[0.88rem] leading-[1.95] text-ink-soft">
+                19:00までにご来店のお客様は、2タイム（120分）飲み放題が4,000円です。
+              </p>
+              <ActionLink
+                href="/news/happy-hour-2026/"
+                variant="ghost"
+                className="mt-3"
+              >
+                詳しくはこちら
+              </ActionLink>
+            </div>
           </Reveal>
 
           <Reveal delay={100}>
@@ -372,9 +387,7 @@ export default function MenuPage() {
       <section className="border-y border-rose/12 bg-shell py-14 md:py-20">
         <div className="container-page">
           <Reveal className="max-w-2xl">
-            <SectionHeading eyebrow="Extra">
-              主な追加料金
-            </SectionHeading>
+            <SectionHeading eyebrow="Extra">主な追加料金</SectionHeading>
             <p className="mt-5 text-[0.92rem] leading-[2] text-ink-soft">
               セット料金のほかに、よくご注文いただくものです。フード・シャンパン・テキーラの料金は上のメニューをご覧ください。いずれもご希望の場合のみのご注文です。
             </p>

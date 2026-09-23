@@ -80,6 +80,7 @@ export default async function NewsDetailPage({ params }: Params) {
             name: post.eventName ?? post.title,
             description: post.metaDescription ?? post.excerpt,
             startDate: post.eventDate,
+            endDate: post.eventEndDate,
             url,
             image,
             price: post.eventPrice,
@@ -126,6 +127,9 @@ export default async function NewsDetailPage({ params }: Params) {
                 </dt>
                 <dd className="mt-1 font-display text-[1.15rem] text-bordeaux">
                   {formatDateJa(post.eventDate)}
+                  {post.eventEndDate
+                    ? `〜${formatDateJa(post.eventEndDate)}`
+                    : ''}
                   {ended ? (
                     <span className="ml-3 rounded-full bg-ink-soft/80 px-2.5 py-0.5 align-middle font-sans text-[0.68rem] tracking-[0.08em] text-ivory">
                       終了しました
@@ -232,7 +236,9 @@ export default async function NewsDetailPage({ params }: Params) {
                         alt=""
                         fill
                         sizes="(min-width: 640px) 30vw, 90vw"
-                        style={{ objectPosition: p.isPoster ? 'center top' : 'center' }}
+                        style={{
+                          objectPosition: p.isPoster ? 'center top' : 'center',
+                        }}
                         className="object-cover transition-transform duration-[900ms] group-hover:scale-[1.04]"
                       />
                     </div>
