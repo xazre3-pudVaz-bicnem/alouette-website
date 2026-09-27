@@ -46,6 +46,12 @@ const nextConfig: NextConfig = {
    */
   async redirects() {
     return [
+      // 掲載を終えたイベント記事（店舗の指示で削除）はイベント一覧へ
+      {
+        source: '/news/yui-birthday-2026',
+        destination: '/news/',
+        permanent: true,
+      },
       // 出勤情報ページは廃止したためトップへ（既にインデックスされている場合の受け皿）
       { source: '/schedule', destination: '/', permanent: true },
       // 旧「Hello world!」投稿と、日付アーカイブ配下の投稿
