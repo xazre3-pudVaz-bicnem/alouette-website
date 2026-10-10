@@ -197,7 +197,7 @@ links:
   （新しい段落にしたいときは、1行空けてください）
 - すべての記事に `Article` の構造化データが出力されます
 
-掲載中の記事：`tequila-wine-day-202609.md`（テキーラ＆ワインデー）／`happy-hour-2026.md`（ハッピーアワー）
+掲載中の記事：`shifuku-day-202610.md`（秘密の私服デー・10月13日〜14日）
 
 記事を削除するときは、`.md` と `public/images/news/` の画像を消したうえで、
 すでに公開していたURLは `next.config.ts` の `redirects()` で `/news/` へ301転送してください
