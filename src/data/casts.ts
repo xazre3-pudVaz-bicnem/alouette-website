@@ -93,7 +93,7 @@ export const casts: Cast[] = [
     name: 'ぴゆ',
     nickname: 'ぴゆちゃん',
     catchphrase: 'お酒が飲める合法ロリ',
-    mainImage: '/images/cast/piyu-main-202609.jpg',
+    mainImage: '/images/cast/piyu-main-202610.jpg',
     gallery: [],
     birthday: '10月8日',
     favorites: ['ちいかわのうさぎ'],

@@ -158,8 +158,8 @@ export const galleryImages: GalleryImage[] = [
     height: 1336,
   },
   {
-    src: '/images/cast/piyu-main-202609.jpg',
-    alt: 'alouette のキャスト ぴゆ。水色のフリル衣装',
+    src: '/images/cast/piyu-main-202610.jpg',
+    alt: 'alouette のキャスト ぴゆ。猫耳と青いリボンのメイド衣装',
     category: 'キャスト',
     width: 1108,
     height: 1477,
